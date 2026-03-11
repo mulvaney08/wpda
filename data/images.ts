@@ -141,10 +141,10 @@ export const competitiveImages = {
 } as const;
 
 export const contactImage: ImageAsset = {
-  src: "/images/wpda8.jpeg",
-  alt: "Children in class showing confidence and joy",
-  width: 1536,
-  height: 2048
+  src: "/images/wpda.webp",
+  alt: "Wojtek Potaszkin Dance Academy logo",
+  width: 574,
+  height: 600
 };
 
 export const teamHeadshots: Record<string, ImageAsset | null> = {

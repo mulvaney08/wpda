@@ -58,7 +58,12 @@ export default function ContactPage() {
           </article>
 
           <article className="surface overflow-hidden">
-            <ImagePanel image={contactImage} className="rounded-none border-0 aspect-[4/5]" />
+            <ImagePanel
+              image={contactImage}
+              className="rounded-none border-0 h-[360px] md:h-[420px] bg-[#1d1d1b]"
+              imgClassName="object-contain"
+              imgStyle={{ objectFit: "contain", objectPosition: "center" }}
+            />
             <div className="p-7">
               <h2 className="font-serif text-3xl">Talk to the academy</h2>
               <ul className="mt-5 space-y-3 text-white/80">
