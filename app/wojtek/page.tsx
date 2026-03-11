@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/page-hero";
 import { SectionHeading } from "@/components/section-heading";
+import { ImagePanel } from "@/components/image-panel";
+import { wojtekGallery } from "@/data/images";
 
 export const metadata: Metadata = {
   title: "Wojtek Potaszkin",
@@ -30,17 +32,31 @@ export default function WojtekPage() {
       />
 
       <section className="section-wrap pb-12">
-        <SectionHeading
-          eyebrow="Career Journey"
-          title="From early dance in Poland to leading a Dublin academy"
-          intro="His trajectory reflects long-term commitment to high-level Ballroom and Latin performance, coaching and adjudication."
-        />
-        <div className="mt-7 space-y-4">
-          {timeline.map((item, index) => (
-            <article key={item} className="surface p-5">
-              <p className="text-xs uppercase tracking-[0.2em] text-gold">Chapter {index + 1}</p>
-              <p className="mt-2 text-white/85">{item}</p>
-            </article>
+        <div className="grid gap-6 lg:grid-cols-5">
+          <ImagePanel image={wojtekGallery[0]} className="aspect-[4/5] lg:col-span-2" priority />
+          <div className="lg:col-span-3">
+            <SectionHeading
+              eyebrow="Career Journey"
+              title="From early dance in Poland to leading a Dublin academy"
+              intro="His trajectory reflects long-term commitment to high-level Ballroom and Latin performance, coaching and adjudication."
+            />
+            <div className="mt-6 space-y-3">
+              {timeline.map((item, index) => (
+                <article key={item} className="surface p-5">
+                  <p className="text-xs uppercase tracking-[0.2em] text-gold">Chapter {index + 1}</p>
+                  <p className="mt-2 text-white/85">{item}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-wrap pb-12">
+        <SectionHeading eyebrow="Founder Portfolio" title="Professional profile and adjudication moments" />
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {wojtekGallery.slice(1).map((image) => (
+            <ImagePanel key={image.src} image={image} className="aspect-square" />
           ))}
         </div>
       </section>

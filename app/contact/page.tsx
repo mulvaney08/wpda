@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/page-hero";
+import { ImagePanel } from "@/components/image-panel";
+import { contactImage } from "@/data/images";
 import { siteConfig } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -55,40 +57,43 @@ export default function ContactPage() {
             <p className="mt-4 text-xs text-white/55">Form wiring can be connected to your preferred email/service provider.</p>
           </article>
 
-          <article className="surface p-7">
-            <h2 className="font-serif text-3xl">Talk to the academy</h2>
-            <ul className="mt-5 space-y-3 text-white/80">
-              <li>Email: <a href={`mailto:${siteConfig.email}`} className="text-gold hover:text-ivory">{siteConfig.email}</a></li>
-              <li>Phone: <span className="text-white/60">{siteConfig.phone} (placeholder)</span></li>
-              <li>
-                WhatsApp: <a href={siteConfig.whatsapp} className="text-gold hover:text-ivory">Start chat (placeholder link)</a>
-              </li>
-              <li>Dublin studio location: <span className="text-white/60">exact address to be confirmed</span></li>
-            </ul>
+          <article className="surface overflow-hidden">
+            <ImagePanel image={contactImage} className="rounded-none border-0 aspect-[4/5]" />
+            <div className="p-7">
+              <h2 className="font-serif text-3xl">Talk to the academy</h2>
+              <ul className="mt-5 space-y-3 text-white/80">
+                <li>
+                  Email: <a href={`mailto:${siteConfig.email}`} className="text-gold hover:text-ivory">{siteConfig.email}</a>
+                </li>
+                <li>Phone: <span className="text-white/60">{siteConfig.phone} (placeholder)</span></li>
+                <li>
+                  WhatsApp: <a href={siteConfig.whatsapp} className="text-gold hover:text-ivory">Start chat (placeholder link)</a>
+                </li>
+                <li>Dublin studio location: <span className="text-white/60">exact address to be confirmed</span></li>
+              </ul>
 
-            <div className="mt-6 rounded-2xl border border-dashed border-white/20 bg-black/25 p-6">
-              <p className="text-xs uppercase tracking-[0.2em] text-gold">Map Placeholder</p>
-              <p className="mt-3 text-sm text-white/70">
-                Embed Google Maps once final studio address details are confirmed.
-              </p>
-            </div>
+              <div className="mt-6 rounded-2xl border border-dashed border-white/20 bg-black/25 p-6">
+                <p className="text-xs uppercase tracking-[0.2em] text-gold">Map Placeholder</p>
+                <p className="mt-3 text-sm text-white/70">Embed Google Maps once final studio address details are confirmed.</p>
+              </div>
 
-            <div className="mt-6 space-y-2 text-sm text-white/80">
-              <p>
-                <a href={siteConfig.facebook} target="_blank" rel="noreferrer" className="hover:text-gold">
-                  Facebook
-                </a>
-              </p>
-              <p>
-                <a href={siteConfig.instagram} target="_blank" rel="noreferrer" className="hover:text-gold">
-                  Instagram
-                </a>
-              </p>
-              <p>
-                <a href={siteConfig.youtube} target="_blank" rel="noreferrer" className="hover:text-gold">
-                  YouTube
-                </a>
-              </p>
+              <div className="mt-6 space-y-2 text-sm text-white/80">
+                <p>
+                  <a href={siteConfig.facebook} target="_blank" rel="noreferrer" className="hover:text-gold">
+                    Facebook
+                  </a>
+                </p>
+                <p>
+                  <a href={siteConfig.instagram} target="_blank" rel="noreferrer" className="hover:text-gold">
+                    Instagram
+                  </a>
+                </p>
+                <p>
+                  <a href={siteConfig.youtube} target="_blank" rel="noreferrer" className="hover:text-gold">
+                    YouTube
+                  </a>
+                </p>
+              </div>
             </div>
           </article>
         </div>

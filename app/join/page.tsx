@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHero } from "@/components/page-hero";
+import { ImagePanel } from "@/components/image-panel";
 
 export const metadata: Metadata = {
   title: "Timetable & Join Us",
@@ -27,25 +28,35 @@ const pathways = [
   }
 ];
 
+const timetable = {
+  src: "/images/timetable_wpda.png",
+  alt: "Wojtek Potaszkin Dance Academy timetable image",
+  width: 862,
+  height: 588
+};
+
 export default function JoinPage() {
   return (
     <>
       <PageHero
         eyebrow="Join WPDA"
         title="Find your timetable pathway"
-        intro="Class slots vary by age group, level and season. Contact the academy for the most current timetable and placement guidance."
+        intro="Class slots vary by age group, level and season. Contact the academy for current timetable guidance and placement support."
         ctaLabel="Request Current Timetable"
         ctaHref="/contact"
       />
 
       <section className="section-wrap pb-14">
-        <div className="grid gap-5 md:grid-cols-2">
-          {pathways.map((path) => (
-            <article key={path.title} className="surface p-6">
-              <h2 className="font-serif text-2xl">{path.title}</h2>
-              <p className="mt-3 text-white/80">{path.text}</p>
-            </article>
-          ))}
+        <div className="grid gap-6 lg:grid-cols-5">
+          <div className="lg:col-span-3 grid gap-5 md:grid-cols-2">
+            {pathways.map((path) => (
+              <article key={path.title} className="surface p-6">
+                <h2 className="font-serif text-2xl">{path.title}</h2>
+                <p className="mt-3 text-white/80">{path.text}</p>
+              </article>
+            ))}
+          </div>
+          <ImagePanel image={timetable} className="lg:col-span-2 aspect-[4/3]" />
         </div>
 
         <div className="surface mt-8 p-8 text-center">

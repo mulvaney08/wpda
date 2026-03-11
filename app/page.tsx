@@ -1,7 +1,10 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { SectionHeading } from "@/components/section-heading";
-import { siteConfig, styleCards, classCategories, successHighlights, teamMembers, valuePillars } from "@/data/site";
+import { ImagePanel } from "@/components/image-panel";
+import { HomeTeamAccordion } from "@/components/home-team-accordion";
+import { siteConfig, styleCards, classCategories, successHighlights, valuePillars } from "@/data/site";
+import { academyImageByStyle, classesImages, homepageImages } from "@/data/images";
 
 export const metadata: Metadata = {
   title: "Dance Academy Dublin | Ballroom, Latin, Breaking, Hip-Hop",
@@ -13,60 +16,79 @@ export default function HomePage() {
   return (
     <>
       <section className="section-wrap pb-12 pt-14 sm:pb-16 sm:pt-20">
-        <div className="editorial-grid items-end gap-y-10">
-          <div className="col-span-12 md:col-span-7">
+        <div className="editorial-grid items-center gap-y-10">
+          <div className="col-span-12 md:col-span-6">
             <p className="text-xs uppercase tracking-[0.24em] text-gold">Dance Academy Dublin</p>
             <h1 className="mt-5 font-serif text-5xl leading-[1.05] sm:text-6xl lg:text-7xl">
-              Ballroom elegance. Latin fire. Breaking energy.
+              High-level training with a warm, supportive academy culture.
             </h1>
-            <p className="mt-6 max-w-2xl text-lg text-white/80">
-              WPDA is a high-performance dance academy in Dublin for children, teens and adults. Train in Ballroom, Latin, Breaking and Hip-Hop from first steps to championship floors.
+            <p className="mt-6 max-w-xl text-lg text-white/80">
+              WPDA welcomes children, teens and adults into Ballroom, Latin, Breaking and Hip-Hop. Beginners feel comfortable from day one, and committed dancers can grow toward competitive goals.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <Link href="/classes" className="rounded-full bg-gold px-6 py-3 text-sm font-semibold text-black hover:bg-ivory">
-                Explore Classes
+                Find Your Class
               </Link>
               <Link href="/contact" className="rounded-full border border-white/30 px-6 py-3 text-sm font-semibold hover:border-gold hover:text-gold">
-                Book A Trial Chat
+                Talk To The Academy
               </Link>
             </div>
           </div>
-          <div className="col-span-12 md:col-span-5">
-            <div className="surface relative min-h-[340px] overflow-hidden p-8 shadow-glow">
-              <div className="absolute inset-0 bg-gradient-to-b from-crimson/20 via-transparent to-electric/15" aria-hidden />
-              <div className="absolute -right-20 top-4 h-52 w-52 rounded-full bg-gold/20 blur-3xl" aria-hidden />
-              <div className="absolute -left-16 bottom-0 h-52 w-52 rounded-full bg-electric/20 blur-3xl" aria-hidden />
-              <div className="relative">
-                <p className="text-xs uppercase tracking-[0.2em] text-gold">All Ages Welcome</p>
-                <ul className="mt-5 space-y-3 text-white/90">
-                  <li>Children from early years to youth competitors</li>
-                  <li>Teen pathways for style and performance growth</li>
-                  <li>Adult beginners, social and competitive dancers</li>
-                </ul>
-              </div>
-            </div>
+          <div className="col-span-12 md:col-span-6 md:pt-6">
+            <ImagePanel image={homepageImages.hero} priority className="aspect-[127/100] md:aspect-[122/100] shadow-glow" imgClassName="object-[50%_58%]" />
           </div>
         </div>
       </section>
 
-      <section className="section-wrap py-14">
+      <section className="section-wrap py-12">
         <SectionHeading
-          eyebrow="Academy Overview"
-          title="A serious academy culture with a supportive studio atmosphere"
-          intro="WPDA combines elite standards with a caring training environment. Dancers are coached to develop technical quality, confidence and performance presence while feeling supported at every stage."
+          eyebrow="Academy Atmosphere"
+          title="Serious standards, encouraging experience"
+          intro="Families trust WPDA because dancers are coached with care, clear structure and positive discipline. We focus on progress, confidence and enjoyment in equal measure."
         />
+        <div className="mt-8 grid gap-4 md:grid-cols-12">
+          <ImagePanel image={homepageImages.kids} className="aspect-[4/3] md:col-span-4" imgClassName="object-[50%_35%]" />
+          <ImagePanel image={homepageImages.beginners} className="aspect-[4/3] md:col-span-4" imgClassName="object-[50%_42%]" />
+          <ImagePanel image={homepageImages.warmup} className="aspect-[4/3] md:col-span-4" imgClassName="object-[50%_46%]" />
+        </div>
       </section>
 
       <section className="section-wrap pb-12">
         <SectionHeading eyebrow="Find Your Style" title="Four disciplines. One academy standard." />
         <div className="mt-8 grid gap-5 md:grid-cols-2">
-          {styleCards.map((style) => (
-            <article key={style.title} className="surface relative overflow-hidden p-6">
-              <div className={`absolute inset-0 bg-gradient-to-br ${style.accent} opacity-45`} aria-hidden />
-              <h3 className="relative font-serif text-3xl">{style.title}</h3>
-              <p className="relative mt-3 text-white/80">{style.description}</p>
-            </article>
-          ))}
+          {styleCards.map((style) => {
+            const image =
+              style.title === "Ballroom"
+                ? academyImageByStyle.ballroom
+                : style.title === "Latin"
+                  ? academyImageByStyle.latin
+                  : style.title === "Breaking"
+                    ? academyImageByStyle.breaking
+                    : academyImageByStyle.hiphop;
+
+            const imageClass =
+              style.title === "Ballroom"
+                ? "object-cover object-top"
+                : style.title === "Latin"
+                  ? "object-cover object-top"
+                  : style.title === "Breaking"
+                    ? "object-cover object-center"
+                    : "object-cover object-center";
+            const imageStyle =
+              style.title === "Ballroom" || style.title === "Latin"
+                ? { objectPosition: "0px -125px" }
+                : undefined;
+
+            return (
+              <article key={style.title} className="surface overflow-hidden">
+                <ImagePanel image={image} className="aspect-[16/10] rounded-none border-0 bg-black/45" imgClassName={imageClass} imgStyle={imageStyle} />
+                <div className="p-6">
+                  <h3 className="font-serif text-3xl">{style.title}</h3>
+                  <p className="mt-3 text-white/80">{style.description}</p>
+                </div>
+              </article>
+            );
+          })}
         </div>
       </section>
 
@@ -90,8 +112,8 @@ export default function HomePage() {
         <div className="surface p-8 sm:p-10">
           <SectionHeading
             eyebrow="Competitive Pathway"
-            title="Train with intent, from first local events to international ambition"
-            intro="WPDA supports dancers who want to compete through coaching blocks, technical progression, performance development and event preparation."
+            title="Aspirational coaching with step-by-step support"
+            intro="Dancers who want to compete receive clear progression, technical preparation and encouragement that builds confidence over time."
           />
           <div className="mt-6 grid gap-4 md:grid-cols-2">
             {successHighlights.map((item) => (
@@ -119,38 +141,37 @@ export default function HomePage() {
       </section>
 
       <section className="section-wrap py-12">
-        <SectionHeading eyebrow="Team" title="Guided by experienced coaches and academy staff" />
-        <div className="mt-8 grid gap-5 md:grid-cols-2">
-          {teamMembers.slice(0, 4).map((member) => (
-            <article key={member.name} className="surface p-6">
-              <p className="text-xs uppercase tracking-[0.2em] text-gold">{member.focus}</p>
-              <h3 className="mt-2 font-serif text-2xl">{member.name}</h3>
-              <p className="text-sm text-white/70">{member.role}</p>
-              <p className="mt-3 text-white/80">{member.bio}</p>
-            </article>
-          ))}
+        <SectionHeading eyebrow="Team" title="Guided by experienced coaches and caring academy staff" />
+        <div className="mt-8">
+          <HomeTeamAccordion />
         </div>
-        <Link href="/team" className="mt-7 inline-flex text-sm font-semibold text-gold hover:text-ivory">
-          Meet The Full Team →
-        </Link>
+        <div className="mt-6">
+          <Link href="/team" className="text-sm font-semibold text-gold hover:text-ivory">
+            Meet The Full Team →
+          </Link>
+        </div>
       </section>
 
       <section className="section-wrap py-12">
-        <div className="surface p-8 sm:p-10">
-          <SectionHeading
-            eyebrow="Safe & Supportive"
-            title="A studio where progress and wellbeing move together"
-            intro="Parents and dancers trust WPDA for clear communication, respectful coaching, and a positive learning culture that supports long-term growth."
-          />
+        <SectionHeading eyebrow="Gallery Preview" title="A look at academy life" />
+        <div className="mt-8 grid gap-4 sm:grid-cols-3">
+          <ImagePanel image={classesImages.childrenTeens} className="aspect-square" imgClassName="object-[50%_44%]" />
+          <ImagePanel image={homepageImages.competitionKids} className="aspect-square" imgStyle={{ objectPosition: "-30px" }} />
+          <ImagePanel image={academyImageByStyle.hiphop} className="aspect-square" />
+        </div>
+        <div className="mt-6">
+          <Link href="/gallery" className="text-sm font-semibold text-gold hover:text-ivory">
+            View Full Gallery →
+          </Link>
         </div>
       </section>
 
       <section className="section-wrap py-16">
         <div className="surface bg-gradient-to-r from-crimson/20 via-transparent to-electric/20 p-8 text-center sm:p-12">
           <p className="text-xs uppercase tracking-[0.24em] text-gold">Start Your Journey</p>
-          <h2 className="mt-4 font-serif text-4xl">Find the right class at {siteConfig.shortName}</h2>
+          <h2 className="mt-4 font-serif text-4xl">Everyone can start with confidence at {siteConfig.shortName}</h2>
           <p className="mx-auto mt-4 max-w-2xl text-white/80">
-            Beginners welcome. Children and adults welcome. If you are aiming for personal confidence or competitive excellence, we will guide your next step.
+            If you are choosing a first class for your child, returning to dance as an adult, or aiming toward competition, we will help you find the right next step.
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <Link href="/join" className="rounded-full bg-gold px-6 py-3 text-sm font-semibold text-black hover:bg-ivory">

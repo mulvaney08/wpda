@@ -18,6 +18,7 @@ export const navLinks = [
   { href: "/about", label: "About" },
   { href: "/team", label: "Team" },
   { href: "/competitive", label: "Competitive" },
+  { href: "/gallery", label: "Gallery" },
   { href: "/wojtek", label: "Wojtek" },
   { href: "/contact", label: "Contact" }
 ];

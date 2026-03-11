@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHero } from "@/components/page-hero";
 import { SectionHeading } from "@/components/section-heading";
+import { ImagePanel } from "@/components/image-panel";
 import { valuePillars } from "@/data/site";
+import { aboutImages } from "@/data/images";
 
 export const metadata: Metadata = {
   title: "About The Academy",
@@ -16,7 +18,7 @@ export default function AboutPage() {
       <PageHero
         eyebrow="About WPDA"
         title="Built on dedication, attitude and passion"
-        intro="Wojtek Potaszkin Dance Academy is a Dublin dance community where ambitious standards and a caring atmosphere work together for every dancer."
+        intro="Wojtek Potaszkin Dance Academy is a Dublin dance community where high standards and a genuinely caring atmosphere grow side by side."
         ctaLabel="Meet The Team"
         ctaHref="/team"
       />
@@ -24,9 +26,14 @@ export default function AboutPage() {
       <section className="section-wrap pb-12">
         <SectionHeading
           eyebrow="Who We Serve"
-          title="From first steps to performance-ready dancers"
-          intro="WPDA welcomes very young children, teens and adults. The academy supports complete beginners, recreational learners and dancers pursuing competitive goals in Ballroom, Latin, Breaking and Hip-Hop."
+          title="From first-time beginners to competition-focused dancers"
+          intro="WPDA welcomes very young children, teens and adults. Every dancer is supported with clear progression, positive coaching and a class environment that feels motivating and safe."
         />
+        <div className="mt-8 grid gap-4 md:grid-cols-3">
+          <ImagePanel image={aboutImages.community} className="h-80 md:h-96" />
+          <ImagePanel image={aboutImages.academyLife} className="h-80 md:h-96" imgStyle={{ objectPosition: "0px 0px" }} />
+          <ImagePanel image={aboutImages.support} className="h-80 md:h-96" imgClassName="object-[0px_0px]" />
+        </div>
       </section>
 
       <section className="section-wrap pb-12">
@@ -34,19 +41,19 @@ export default function AboutPage() {
           <article className="surface p-7">
             <h2 className="font-serif text-3xl">Our Teaching Philosophy</h2>
             <p className="mt-4 text-white/80">
-              Great dance training combines technical precision with emotional confidence. Coaches at WPDA focus on fundamentals, musicality, performance expression and healthy training habits.
+              Great dance training combines technical precision with emotional confidence. WPDA coaches focus on fundamentals, musicality, performance expression and healthy long-term habits.
             </p>
             <p className="mt-4 text-white/80">
-              Every dancer receives clear progression goals and encouragement to reach full potential in a positive, disciplined environment.
+              Beginners are welcomed with patience, while experienced dancers are guided toward advanced goals with structure and accountability.
             </p>
           </article>
           <article className="surface p-7">
             <h2 className="font-serif text-3xl">Parents & Dancers Partnership</h2>
             <p className="mt-4 text-white/80">
-              The academy works in partnership with families through transparent communication, class guidance and practical support around events and development milestones.
+              The academy works closely with families through transparent communication, class guidance and practical support around events and milestones.
             </p>
             <p className="mt-4 text-white/80">
-              This shared approach helps dancers stay motivated, safe and happy while building long-term progress.
+              This partnership helps dancers stay confident, happy and consistent as they progress.
             </p>
           </article>
         </div>
@@ -68,7 +75,7 @@ export default function AboutPage() {
         <div className="surface p-8 sm:p-10">
           <h2 className="font-serif text-4xl">Beginner to Competitive, Step by Step</h2>
           <p className="mt-4 max-w-3xl text-white/80">
-            Dancers can start with fundamentals, progress through structured class levels, and move into focused coaching for tournaments and championships. This pathway is central to the academy’s identity and long-term dancer development.
+            Dancers can start with foundations, move through structured levels, and transition into focused coaching for tournaments and championships. WPDA supports each stage with clarity and care.
           </p>
           <Link href="/competitive" className="mt-7 inline-flex text-sm font-semibold text-gold hover:text-ivory">
             Explore Competitive Training →
