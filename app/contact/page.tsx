@@ -72,9 +72,16 @@ export default function ContactPage() {
                 <li>Dublin studio location: <span className="text-white/60">exact address to be confirmed</span></li>
               </ul>
 
-              <div className="mt-6 rounded-2xl border border-dashed border-white/20 bg-black/25 p-6">
-                <p className="text-xs uppercase tracking-[0.2em] text-gold">Map Placeholder</p>
-                <p className="mt-3 text-sm text-white/70">Embed Google Maps once final studio address details are confirmed.</p>
+              <div className="mt-6 overflow-hidden rounded-2xl border border-white/20 bg-black/25">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2381.231564707825!2d-6.37729682275584!3d53.35701057392494!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48670d23b1062cb3%3A0x881b2319fc55f4b7!2sWojtek%20Potaszkin%20Dance%20Academy!5e0!3m2!1sen!2sie!4v1773245115149!5m2!1sen!2sie"
+                  className="h-[320px] w-full md:h-[380px]"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Wojtek Potaszkin Dance Academy location map"
+                />
               </div>
 
               <div className="mt-6 space-y-2 text-sm text-white/80">

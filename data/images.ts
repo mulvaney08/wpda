@@ -234,13 +234,13 @@ export const curatedGallery: { title: string; images: ImageAsset[] }[] = [
 ];
 
 export const wojtekGallery: ImageAsset[] = [
-  { src: "/images/wojtek_full.png", alt: "Wojtek Potaszkin founder portrait", width: 1440, height: 1572 },
+  { src: "/images/wojtek_main.webp", alt: "Wojtek Potaszkin founder portrait", width: 960, height: 1280 },
   { src: "/images/wojtek.webp", alt: "Wojtek Potaszkin studio portrait", width: 1376, height: 2048 },
   { src: "/images/wojtek3.webp", alt: "Wojtek Potaszkin at WDSF event", width: 960, height: 959 },
   { src: "/images/wojtek2.webp", alt: "Wojtek Potaszkin adjudicating event", width: 878, height: 524 },
   { src: "/images/wojtek8.webp", alt: "Wojtek Potaszkin at championship floor", width: 720, height: 721 },
   { src: "/images/wojtek7.webp", alt: "Wojtek Potaszkin on adjudicator panel", width: 496, height: 496 },
   { src: "/images/wojtek6.webp", alt: "Wojtek Potaszkin with international officials", width: 992, height: 992 },
-  { src: "/images/wojtek4.webp", alt: "Wojtek Potaszkin judging detail", width: 496, height: 496 },
+  { src: "/images/wojtek_1.webp", alt: "Wojtek Potaszkin judging detail", width: 591, height: 1214 },
   { src: "/images/wojtek5.webp", alt: "Wojtek Potaszkin adjudicator lineup", width: 496, height: 496 }
 ];

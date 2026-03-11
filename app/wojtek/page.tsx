@@ -33,7 +33,7 @@ export default function WojtekPage() {
 
       <section className="section-wrap pb-12">
         <div className="grid gap-6 lg:grid-cols-5">
-          <ImagePanel image={wojtekGallery[0]} className="aspect-[4/5] lg:col-span-2" priority />
+          <ImagePanel image={wojtekGallery[0]} className="h-[520px] lg:col-span-2 lg:h-full" imgClassName="object-[-80px_0px]" priority />
           <div className="lg:col-span-3">
             <SectionHeading
               eyebrow="Career Journey"
@@ -56,7 +56,16 @@ export default function WojtekPage() {
         <SectionHeading eyebrow="Founder Portfolio" title="Professional profile and adjudication moments" />
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {wojtekGallery.slice(1).map((image) => (
-            <ImagePanel key={image.src} image={image} className="aspect-square" />
+            <ImagePanel
+              key={image.src}
+              image={image}
+              className="aspect-square"
+              imgClassName={
+                image.src === "/images/wojtek_1.webp" || image.src === "/images/wojtek.webp"
+                  ? "object-[0px_0px]"
+                  : undefined
+              }
+            />
           ))}
         </div>
       </section>
