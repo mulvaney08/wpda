@@ -1,0 +1,95 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { PageHero } from "@/components/page-hero";
+import { SectionHeading } from "@/components/section-heading";
+import { ImagePanel } from "@/components/image-panel";
+import { getClassCategories, getPageSeo, getTestimonials } from "@/sanity/lib/loaders";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const seo = await getPageSeo("classes");
+
+  return {
+    title: seo?.title || "Classes",
+    description:
+      seo?.description ||
+      "Explore WPDA classes in Dublin: Baby Ballroom, beginner children and adult classes, Breaking, Hip-Hop, private lessons, wedding lessons and competition pathways.",
+    robots: seo?.noindex ? { index: false, follow: false } : undefined
+  };
+}
+
+export default async function ClassesPage() {
+  const [categories, testimonials] = await Promise.all([getClassCategories(), getTestimonials()]);
+
+  return (
+    <>
+      <PageHero
+        eyebrow="Classes At WPDA"
+        title="Clear pathways from first class to competitive floor"
+        intro="Class options for children, teens and adults across Ballroom, Latin, Breaking and Hip-Hop. You can join solo, with a partner, or with a specific goal in mind."
+        ctaLabel="Ask About Your Level"
+        ctaHref="/contact"
+      />
+
+      <section className="section-wrap pb-12">
+        <SectionHeading
+          eyebrow="Program Structure"
+          title="Choose by age, style and confidence level"
+          intro="New dancers are guided gently. Returning dancers are challenged with structure. Competitive dancers are coached with clear progression."
+        />
+        <div className="mt-8 space-y-6">
+          {categories.map((group: { title: string; classes: { name: string; audience: string; description: string; partnerRequired: string }[]; featuredImage: { src: string; alt: string; width: number; height: number } }) => (
+            <article key={group.title} className="surface overflow-hidden">
+              <div className="grid gap-0 lg:grid-cols-5">
+                <ImagePanel image={group.featuredImage} className="rounded-none border-0 lg:col-span-2 lg:aspect-auto" />
+                <div className="p-6 sm:p-8 lg:col-span-3">
+                  <h2 className="font-serif text-3xl">{group.title}</h2>
+                  <div className="mt-5 grid gap-4 md:grid-cols-2">
+                    {group.classes.map((cls: { name: string; audience: string; description: string; partnerRequired: string }) => (
+                      <div key={cls.name} className="rounded-2xl border border-white/10 bg-black/25 p-5">
+                        <h3 className="font-semibold text-lg">{cls.name}</h3>
+                        <p className="mt-2 text-sm text-gold">For: {cls.audience}</p>
+                        <p className="mt-3 text-sm text-white/80">{cls.description}</p>
+                        <p className="mt-4 text-xs uppercase tracking-[0.18em] text-white/60">Partner: {cls.partnerRequired}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {testimonials.length ? (
+        <section className="section-wrap py-12">
+          <SectionHeading eyebrow="Testimonials" title="What dancers and families say" />
+          <div className="mt-8 grid gap-4 md:grid-cols-2">
+            {testimonials.slice(0, 4).map((item: { _id: string; quote: string; name: string }) => (
+              <article key={item._id} className="surface p-6">
+                <p className="text-sm text-white/85">“{item.quote}”</p>
+                <p className="mt-4 text-xs uppercase tracking-[0.18em] text-gold">{item.name}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      <section className="section-wrap py-14">
+        <div className="surface p-8 text-center sm:p-10">
+          <h2 className="font-serif text-4xl">Not sure where to begin?</h2>
+          <p className="mx-auto mt-3 max-w-2xl text-white/80">
+            Tell us your dancer’s age, experience and style preference. We will suggest the most comfortable and effective starting point.
+          </p>
+          <div className="mt-7 flex flex-wrap items-center justify-center gap-4">
+            <Link href="/contact" className="rounded-full bg-gold px-6 py-3 text-sm font-semibold text-black hover:bg-ivory">
+              Contact The Academy
+            </Link>
+            <Link href="/join" className="rounded-full border border-white/30 px-6 py-3 text-sm font-semibold hover:border-gold hover:text-gold">
+              Timetable Pathways
+            </Link>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}

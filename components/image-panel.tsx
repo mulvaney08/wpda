@@ -1,8 +1,8 @@
 import Image from "next/image";
-import type { ImageAsset } from "@/data/images";
+import type { DisplayImage } from "@/src/types/sanity";
 
 type ImagePanelProps = {
-  image: ImageAsset;
+  image: DisplayImage;
   className?: string;
   priority?: boolean;
   imgClassName?: string;
