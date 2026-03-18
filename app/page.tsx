@@ -3,8 +3,18 @@ import type { Metadata } from "next";
 import { SectionHeading } from "@/components/section-heading";
 import { ImagePanel } from "@/components/image-panel";
 import { HomeTeamAccordion } from "@/components/home-team-accordion";
-import { siteConfig, styleCards, classCategories, successHighlights, valuePillars } from "@/data/site";
-import { academyImageByStyle, classesImages, homepageImages } from "@/data/images";
+import { siteConfig, styleCards, classCategories, successHighlights, teamMembers, valuePillars } from "@/data/site";
+import { academyImageByStyle, classesImages, contactImage, homepageImages, teamHeadshots } from "@/data/images";
+
+const homeTeamMembers = teamMembers.map((member) => ({
+  name: member.name,
+  role: member.role,
+  focus: member.focus,
+  shortBio: member.bio,
+  fullBio: member.extra,
+  featured: member.featured,
+  image: teamHeadshots[member.name] || contactImage
+}));
 
 export const metadata: Metadata = {
   title: "Dance Academy Dublin | Ballroom, Latin, Breaking, Hip-Hop",
@@ -143,7 +153,7 @@ export default function HomePage() {
       <section className="section-wrap py-12">
         <SectionHeading eyebrow="Team" title="Guided by experienced coaches and caring academy staff" />
         <div className="mt-8">
-          <HomeTeamAccordion />
+          <HomeTeamAccordion members={homeTeamMembers} />
         </div>
         <div className="mt-6">
           <Link href="/team" className="text-sm font-semibold text-gold hover:text-ivory">
