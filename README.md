@@ -65,6 +65,7 @@ Preview:
 
 Optional (seeding with write access):
 - `SANITY_API_WRITE_TOKEN`
+- `SANITY_REVALIDATE_SECRET` (for webhook-triggered cache revalidation)
 
 ## Install
 
@@ -135,6 +136,16 @@ npm run build
    - `/api/draft-mode/enable`
    - `/api/draft-mode/disable`
 5. Confirm Studio access and publishing flow for editors.
+
+## Keep Live Site Fresh After Publish (with `useCdn: true`)
+
+If published changes are delayed, configure a Sanity webhook to call:
+
+- `POST https://your-domain.com/api/revalidate?secret=YOUR_SECRET`
+
+Where `YOUR_SECRET` equals `SANITY_REVALIDATE_SECRET` in your environment.
+
+This endpoint revalidates key frontend routes so publish updates are visible quickly without redeploy.
 
 ## Scripts
 
