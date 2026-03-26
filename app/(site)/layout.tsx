@@ -7,6 +7,8 @@ import { StructuredData } from "@/components/structured-data";
 import { SanityLive } from "@/sanity/lib/live";
 import { getSiteShell } from "@/sanity/lib/loaders";
 
+export const revalidate = 60;
+
 export async function generateMetadata(): Promise<Metadata> {
   const site = await getSiteShell();
 
