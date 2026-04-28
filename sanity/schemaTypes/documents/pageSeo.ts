@@ -14,7 +14,8 @@ export const pageSeo = defineType({
           { title: "Classes", value: "classes" },
           { title: "Team", value: "team" },
           { title: "Gallery", value: "gallery" },
-          { title: "Join", value: "join" }
+          { title: "Join", value: "join" },
+          { title: "News & Success", value: "news-success" }
         ]
       },
       validation: (Rule) => Rule.required()

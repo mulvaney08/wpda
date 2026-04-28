@@ -48,3 +48,21 @@ export type HomeStyleCard = {
   description: string;
   image: DisplayImage;
 };
+
+export type NewsArticleSummary = {
+  id: string;
+  title: string;
+  slug: string;
+  category: "news" | "success" | "event";
+  excerpt: string;
+  publishedAt: string;
+  eventDate?: string;
+  location?: string;
+  featured?: boolean;
+  coverImage: DisplayImage | null;
+};
+
+export type NewsArticle = NewsArticleSummary & {
+  body: string;
+  seo?: SeoFields;
+};

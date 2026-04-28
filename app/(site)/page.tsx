@@ -1,10 +1,11 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import Image from "next/image";
 import { SectionHeading } from "@/components/section-heading";
 import { ImagePanel } from "@/components/image-panel";
 import { HomeTeamAccordion } from "@/components/home-team-accordion";
 import { classesImages, homepageImages } from "@/data/images";
-import { getHomepageContent, getSiteShell } from "@/sanity/lib/loaders";
+import { getHomepageContent, getNewsArticles, getSiteShell } from "@/sanity/lib/loaders";
 
 export async function generateMetadata(): Promise<Metadata> {
   const content = await getHomepageContent();
@@ -18,11 +19,55 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
+function truncateExcerpt(value: string, maxLength: number) {
+  if (value.length <= maxLength) return value;
+  return `${value.slice(0, maxLength).trimEnd()}...`;
+}
+
+function getSocialIcon(platform: string) {
+  const key = platform.toLowerCase();
+
+  if (key.includes("facebook")) {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden className="h-5 w-5 fill-current">
+        <path d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.9.3-1.5 1.6-1.5h1.7V4.9c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3V11H8v3h2.1v8h3.4Z" />
+      </svg>
+    );
+  }
+
+  if (key.includes("instagram")) {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden className="h-5 w-5 fill-current">
+        <path d="M7.75 2h8.5A5.76 5.76 0 0 1 22 7.75v8.5A5.76 5.76 0 0 1 16.25 22h-8.5A5.76 5.76 0 0 1 2 16.25v-8.5A5.76 5.76 0 0 1 7.75 2Zm8.39 1.72H7.86a4.14 4.14 0 0 0-4.14 4.14v8.28a4.14 4.14 0 0 0 4.14 4.14h8.28a4.14 4.14 0 0 0 4.14-4.14V7.86a4.14 4.14 0 0 0-4.14-4.14ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.72A3.28 3.28 0 1 0 12 15.28 3.28 3.28 0 0 0 12 8.72Zm5.18-2.46a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4Z" />
+      </svg>
+    );
+  }
+
+  if (key.includes("twitter") || key.includes("x")) {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden className="h-5 w-5 fill-current">
+        <path d="M18.9 2H22l-6.77 7.74L23.2 22h-6.25l-4.9-6.82L6.08 22H3l7.24-8.28L.8 2h6.35l4.42 6.17L18.9 2Zm-1.1 18h1.73L6.2 3.9H4.34L17.8 20Z" />
+      </svg>
+    );
+  }
+
+  if (key.includes("youtube")) {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden className="h-5 w-5 fill-current">
+        <path d="M23.5 7.2a3 3 0 0 0-2.1-2.1C19.6 4.6 12 4.6 12 4.6s-7.6 0-9.4.5A3 3 0 0 0 .5 7.2 31.8 31.8 0 0 0 0 12a31.8 31.8 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.8.5 9.4.5 9.4.5s7.6 0 9.4-.5a3 3 0 0 0 2.1-2.1A31.8 31.8 0 0 0 24 12a31.8 31.8 0 0 0-.5-4.8ZM9.6 15.2V8.8L15.8 12l-6.2 3.2Z" />
+      </svg>
+    );
+  }
+
+  return null;
+}
+
 export default async function HomePage() {
-  const [content, site] = await Promise.all([getHomepageContent(), getSiteShell()]);
+  const [content, site, newsArticles] = await Promise.all([getHomepageContent(), getSiteShell(), getNewsArticles()]);
 
   const introImages = content.introImages.length >= 3 ? content.introImages : [homepageImages.kids, homepageImages.beginners, homepageImages.warmup];
   const galleryPreview = content.galleryPreviewImages.length >= 3 ? content.galleryPreviewImages : [classesImages.childrenTeens, homepageImages.competitionKids, classesImages.specialist];
+  const recentNews = newsArticles.slice(0, 3);
 
   return (
     <>
@@ -68,7 +113,7 @@ export default async function HomePage() {
                   : style.title === "Breaking"
                     ? "object-cover object-center"
                     : "object-cover object-center";
-            const imageStyle = style.title === "Ballroom" || style.title === "Latin" ? { objectPosition: "0px -125px" } : undefined;
+            const imageStyle = style.title === "Ballroom" || style.title === "Latin" ? { objectPosition: "50% 16%" } : undefined;
 
             return (
               <article key={style.title} className="surface overflow-hidden">
@@ -144,6 +189,50 @@ export default async function HomePage() {
       </section>
 
       <section className="section-wrap py-12">
+        <SectionHeading
+          eyebrow="News & Success"
+          title="Recent academy highlights"
+          intro="Latest WPDA competition outcomes, event updates and academy milestones."
+        />
+        {recentNews.length ? (
+          <div className="mt-8 grid gap-5 md:grid-cols-3">
+            {recentNews.map((article) => (
+              <article key={article.id} className="surface overflow-hidden">
+                {article.coverImage ? (
+                  <div className="relative aspect-[3/4] overflow-hidden">
+                    <Image
+                      src={article.coverImage.src}
+                      alt={article.coverImage.alt}
+                      fill
+                      sizes="(min-width: 1024px) 30vw, (min-width: 768px) 45vw, 100vw"
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+                ) : null}
+                <div className="p-5">
+                  <p className="text-xs uppercase tracking-[0.16em] text-gold">
+                    {article.category.charAt(0).toUpperCase() + article.category.slice(1)}
+                  </p>
+                  <h3 className="mt-2 font-serif text-2xl leading-tight">{article.title}</h3>
+                  <p className="mt-3 text-sm text-white/75">{truncateExcerpt(article.excerpt, 120)}</p>
+                  <Link href={`/news-success/${article.slug}`} className="mt-4 inline-flex text-sm font-semibold text-gold hover:text-ivory">
+                    Read Story →
+                  </Link>
+                </div>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <div className="surface mt-8 p-6 text-white/80">No news items published yet.</div>
+        )}
+        <div className="mt-6">
+          <Link href="/news-success" className="text-sm font-semibold text-gold hover:text-ivory">
+            View All News & Success →
+          </Link>
+        </div>
+      </section>
+
+      <section className="section-wrap py-12">
         <SectionHeading eyebrow="Gallery Preview" title="A look at academy life" />
         <div className="mt-8 grid gap-4 sm:grid-cols-3">
           <ImagePanel image={galleryPreview[0]} className="aspect-square" imgClassName="object-[50%_44%]" />
@@ -169,6 +258,23 @@ export default async function HomePage() {
             <a href={content.finalSecondaryCta.href} className="rounded-full border border-white/30 px-6 py-3 text-sm font-semibold hover:border-gold hover:text-gold">
               {content.finalSecondaryCta.label}
             </a>
+          </div>
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+            {site.socialLinks
+              .filter((item: { platform: string }) => Boolean(getSocialIcon(item.platform)))
+              .map((item: { platform: string; url: string }) => (
+                <a
+                  key={item.platform}
+                  href={item.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={item.platform}
+                  title={item.platform}
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/25 bg-black/25 text-white/85 hover:border-gold hover:text-gold"
+                >
+                  {getSocialIcon(item.platform)}
+                </a>
+              ))}
           </div>
         </div>
       </section>

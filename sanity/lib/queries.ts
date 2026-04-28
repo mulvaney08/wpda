@@ -2,7 +2,8 @@ import { groq } from "next-sanity";
 
 const imageFields = groq`
   alt,
-  asset->{
+  asset,
+  "assetMeta": asset->{
     metadata{dimensions{width,height}}
   },
   crop,
@@ -160,6 +161,38 @@ export const joinPageQuery = groq`*[_type == "joinPage"][0]{
 
 export const pageSeoByKeyQuery = groq`*[_type == "pageSeo" && pageKey == $pageKey][0]{
   seo{title,description,noindex,ogImage{${imageFields}}}
+}`;
+
+export const newsArticlesQuery = groq`*[_type == "newsArticle"]|order(featured desc, publishedAt desc){
+  _id,
+  title,
+  "slug": slug.current,
+  category,
+  excerpt,
+  publishedAt,
+  eventDate,
+  location,
+  featured,
+  coverImage{${imageFields}}
+}`;
+
+export const newsArticleBySlugQuery = groq`*[_type == "newsArticle" && slug.current == $slug][0]{
+  _id,
+  title,
+  "slug": slug.current,
+  category,
+  excerpt,
+  publishedAt,
+  eventDate,
+  location,
+  featured,
+  body,
+  coverImage{${imageFields}},
+  seo{title,description,noindex,ogImage{${imageFields}}}
+}`;
+
+export const newsArticleSlugsQuery = groq`*[_type == "newsArticle" && defined(slug.current)][]{
+  "slug": slug.current
 }`;
 
 export const wojtekGalleryFallbackQuery = groq`*[_type == "galleryImage" && wojtekOnly == true]|order(featured desc, order asc){

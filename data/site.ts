@@ -5,11 +5,12 @@ export const siteConfig = {
   city: "Dublin",
   country: "Ireland",
   email: "contact@replace-this-email.ie",
-  phone: "+353 (0)00 000 0000",
-  whatsapp: "#",
-  instagram: "https://www.instagram.com/wojtekdance/",
-  facebook: "https://www.facebook.com/WojtekDance",
-  youtube: "https://www.youtube.com/channel/UCuTfVfM0dNf1Zx3kJ7gR-UQ"
+  phone: "+353858755367",
+  whatsapp: "https://api.whatsapp.com/send?phone=353858755367&text=Hi%2C%20I%20got%20your%20WhatsApp%20information%20from%20your%20website.",
+  instagram: "https://www.instagram.com/wojtek_potaszkin",
+  facebook: "https://www.facebook.com/WPDanceAcademy/",
+  twitter: "https://twitter.com/WPotaszkin/",
+  youtube: "https://www.youtube.com/channel/UCQEKtyPazgjqwHe8cIBZUAQ"
 };
 
 export const navLinks = [
@@ -18,6 +19,7 @@ export const navLinks = [
   { href: "/about", label: "About" },
   { href: "/team", label: "Team" },
   { href: "/competitive", label: "Competitive" },
+  { href: "/news-success", label: "News & Success" },
   { href: "/gallery", label: "Gallery" },
   { href: "/wojtek", label: "Wojtek" },
   { href: "/contact", label: "Contact" }

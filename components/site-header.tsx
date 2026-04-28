@@ -10,7 +10,6 @@ export function SiteHeader({ site }: SiteHeaderProps) {
     <SiteHeaderClient
       navLinks={site.navLinks}
       academyName={site.academyName}
-      tagline={site.tagline}
       whatsapp={site.whatsapp}
     />
   );

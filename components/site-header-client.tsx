@@ -2,19 +2,24 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useRef } from "react";
 import type { NavLink } from "@/src/types/sanity";
 
 type SiteHeaderClientProps = {
   navLinks: NavLink[];
   academyName: string;
-  tagline: string;
   whatsapp?: string;
 };
 
-export function SiteHeaderClient({ navLinks, academyName, tagline, whatsapp }: SiteHeaderClientProps) {
+export function SiteHeaderClient({ navLinks, academyName, whatsapp }: SiteHeaderClientProps) {
   const pathname = usePathname();
+  const mobileMenuRef = useRef<HTMLDetailsElement>(null);
   const nameParts = academyName.split(" ");
   const monogram = (nameParts[0]?.[0] ?? "") + (nameParts[1]?.[0] ?? "");
+
+  useEffect(() => {
+    mobileMenuRef.current?.removeAttribute("open");
+  }, [pathname]);
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-base/80 backdrop-blur-xl">
@@ -52,16 +57,25 @@ export function SiteHeaderClient({ navLinks, academyName, tagline, whatsapp }: S
           </Link>
         </div>
 
-        <details className="group md:hidden">
+        <details ref={mobileMenuRef} className="group md:hidden">
           <summary className="list-none rounded-full border border-white/15 px-4 py-2 text-sm">Menu</summary>
           <nav className="absolute right-4 mt-3 w-56 rounded-2xl border border-white/15 bg-panel p-3 shadow-xl" aria-label="Mobile navigation">
             {navLinks.map((link) => (
-              <Link key={link.href} href={link.href} className="block rounded-lg px-3 py-2 text-sm text-white/85 hover:bg-white/10">
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => mobileMenuRef.current?.removeAttribute("open")}
+                className="block rounded-lg px-3 py-2 text-sm text-white/85 hover:bg-white/10"
+              >
                 {link.label}
               </Link>
             ))}
             {whatsapp ? (
-              <a href={whatsapp} className="mt-2 block rounded-lg bg-gold px-3 py-2 text-center text-sm font-medium text-black">
+              <a
+                href={whatsapp}
+                onClick={() => mobileMenuRef.current?.removeAttribute("open")}
+                className="mt-2 block rounded-lg bg-gold px-3 py-2 text-center text-sm font-medium text-black"
+              >
                 WhatsApp Us
               </a>
             ) : null}

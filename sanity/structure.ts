@@ -13,8 +13,11 @@ export const structure: StructureResolver = (S) =>
       S.listItem().title("Wojtek profile").id("wojtekProfile").child(S.document().schemaType("wojtekProfile").documentId("wojtekProfile")),
       S.listItem().title("Contact page").id("contactPage").child(S.document().schemaType("contactPage").documentId("contactPage")),
       S.listItem().title("Join page").id("joinPage").child(S.document().schemaType("joinPage").documentId("joinPage")),
+      S.listItem().title("News & Success").id("newsArticle").child(S.documentTypeList("newsArticle").title("News & Success")),
       S.divider(),
-      ...S.documentTypeListItems().filter((listItem) => !singletonTypes.has(listItem.getId() || ""))
+      ...S.documentTypeListItems().filter(
+        (listItem) => !singletonTypes.has(listItem.getId() || "") && listItem.getId() !== "newsArticle"
+      )
     ]);
 
 export const singletonActions = new Set(["publish", "discardChanges", "restore"]);

@@ -18,6 +18,7 @@ import { galleryImage } from "@/sanity/schemaTypes/documents/galleryImage";
 import { contactPage } from "@/sanity/schemaTypes/documents/contactPage";
 import { joinPage } from "@/sanity/schemaTypes/documents/joinPage";
 import { pageSeo } from "@/sanity/schemaTypes/documents/pageSeo";
+import { newsArticle } from "@/sanity/schemaTypes/documents/newsArticle";
 
 export const schemaTypes: SchemaTypeDefinition[] = [
   seo,
@@ -38,5 +39,6 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   galleryImage,
   contactPage,
   joinPage,
-  pageSeo
+  pageSeo,
+  newsArticle
 ];

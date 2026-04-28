@@ -19,6 +19,7 @@ import {
   valuePillars as fallbackValuePillars
 } from "@/data/site";
 import { sanityFetch } from "@/sanity/lib/live";
+import { client } from "@/sanity/lib/client";
 import { toDisplayImage } from "@/sanity/lib/image";
 import {
   academyPageQuery,
@@ -28,6 +29,9 @@ import {
   galleryImagesQuery,
   homepageQuery,
   joinPageQuery,
+  newsArticleBySlugQuery,
+  newsArticleSlugsQuery,
+  newsArticlesQuery,
   pageSeoByKeyQuery,
   siteSettingsQuery,
   teamMembersQuery,
@@ -35,7 +39,7 @@ import {
   wojtekGalleryFallbackQuery,
   wojtekPageQuery
 } from "@/sanity/lib/queries";
-import type { DisplayImage, HomeStyleCard, NavLink, SeoFields, SiteShell, TeamMemberCard } from "@/src/types/sanity";
+import type { DisplayImage, HomeStyleCard, NavLink, NewsArticle, NewsArticleSummary, SeoFields, SiteShell, TeamMemberCard } from "@/src/types/sanity";
 
 type SanityClassCategory = {
   title: string;
@@ -56,8 +60,45 @@ type SanityTeamMember = {
   profileImage?: Parameters<typeof toDisplayImage>[0];
 };
 
+type SanityNewsArticle = {
+  _id: string;
+  title: string;
+  slug?: string;
+  category?: "news" | "success" | "event";
+  excerpt: string;
+  publishedAt?: string;
+  eventDate?: string;
+  location?: string;
+  featured?: boolean;
+  body?: string;
+  seo?: SeoFields;
+  coverImage?: Parameters<typeof toDisplayImage>[0];
+};
+
 export const getSiteShell = cache(async (): Promise<SiteShell> => {
   const { data } = await sanityFetch({ query: siteSettingsQuery, tags: ["siteSettings"] });
+
+  const baseNavLinks = (data?.navLinks?.length ? data.navLinks : fallbackNavLinks) as NavLink[];
+  const navLinks = baseNavLinks.some((link) => link.href === "/news-success")
+    ? baseNavLinks
+    : [...baseNavLinks, { href: "/news-success", label: "News & Success" }];
+
+  const baseSocialLinks = (data?.socialLinks?.length
+    ? data.socialLinks
+    : [
+        { platform: "facebook", url: siteConfig.facebook },
+        { platform: "instagram", url: siteConfig.instagram },
+        { platform: "twitter", url: siteConfig.twitter },
+        { platform: "youtube", url: siteConfig.youtube }
+      ]) as { platform: string; url: string }[];
+
+  const socialLinks = [
+    ...baseSocialLinks,
+    { platform: "facebook", url: siteConfig.facebook },
+    { platform: "instagram", url: siteConfig.instagram },
+    { platform: "twitter", url: siteConfig.twitter },
+    { platform: "youtube", url: siteConfig.youtube }
+  ].filter((item, index, list) => list.findIndex((entry) => entry.platform.toLowerCase() === item.platform.toLowerCase()) === index);
 
   return {
     academyName: data?.academyName || siteConfig.name,
@@ -71,14 +112,9 @@ export const getSiteShell = cache(async (): Promise<SiteShell> => {
     footerText:
       data?.footerText ||
       "Premium Ballroom, Latin, Breaking and Hip-Hop training in Dublin for children, teens, adults and competitive dancers.",
-    socialLinks:
-      data?.socialLinks || [
-        { platform: "facebook", url: siteConfig.facebook },
-        { platform: "instagram", url: siteConfig.instagram },
-        { platform: "youtube", url: siteConfig.youtube }
-      ],
+    socialLinks,
     defaultSeo: data?.defaultSeo,
-    navLinks: (data?.navLinks?.length ? data.navLinks : fallbackNavLinks) as NavLink[]
+    navLinks
   };
 });
 
@@ -370,7 +406,61 @@ export const getJoinPage = cache(async () => {
   };
 });
 
-export const getPageSeo = cache(async (pageKey: "classes" | "team" | "gallery" | "join") => {
+export const getNewsArticles = cache(async (): Promise<NewsArticleSummary[]> => {
+  const { data } = await sanityFetch({ query: newsArticlesQuery, tags: ["newsArticle"] });
+
+  if (!data?.length) return [];
+
+  return (data as SanityNewsArticle[])
+    .filter((item) => Boolean(item.slug))
+    .map((item) => ({
+      id: item._id,
+      title: item.title,
+      slug: item.slug || "",
+      category: item.category || "news",
+      excerpt: item.excerpt,
+      publishedAt: item.publishedAt || new Date().toISOString(),
+      eventDate: item.eventDate,
+      location: item.location,
+      featured: item.featured,
+      coverImage: toDisplayImage(item.coverImage, item.title)
+    }));
+});
+
+export const getNewsArticleBySlug = cache(async (slug: string): Promise<NewsArticle | null> => {
+  const { data } = await sanityFetch({
+    query: newsArticleBySlugQuery,
+    params: { slug },
+    tags: ["newsArticle", `newsArticle:${slug}`]
+  });
+
+  const item = data as SanityNewsArticle | null;
+  if (!item || !item.slug) return null;
+
+  return {
+    id: item._id,
+    title: item.title,
+    slug: item.slug,
+    category: item.category || "news",
+    excerpt: item.excerpt,
+    body: item.body || "",
+    publishedAt: item.publishedAt || new Date().toISOString(),
+    eventDate: item.eventDate,
+    location: item.location,
+    featured: item.featured,
+    coverImage: toDisplayImage(item.coverImage, item.title),
+    seo: item.seo
+  };
+});
+
+export const getNewsArticleSlugs = cache(async (): Promise<string[]> => {
+  const data = await client.withConfig({ stega: { enabled: false } }).fetch(newsArticleSlugsQuery);
+  if (!data?.length) return [];
+
+  return (data as { slug?: string }[]).map((item) => item.slug).filter((slug): slug is string => Boolean(slug));
+});
+
+export const getPageSeo = cache(async (pageKey: "classes" | "team" | "gallery" | "join" | "news-success") => {
   const { data } = await sanityFetch({
     query: pageSeoByKeyQuery,
     params: { pageKey },
