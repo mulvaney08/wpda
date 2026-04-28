@@ -116,7 +116,7 @@ export const getHomepageContent = cache(async () => {
   }));
 
   return {
-    heroEyebrow: home?.heroEyebrow || "Dance Academy Dublin",
+    heroEyebrow: home?.heroEyebrow || "Dance Academy",
     heroHeadline: home?.heroHeadline || "High-level training with a warm, supportive academy culture.",
     heroSubheadline:
       home?.heroSubheadline ||
@@ -388,6 +388,7 @@ export const getTestimonials = cache(async () => {
 function normalizeTeam(data: SanityTeamMember[] | null | undefined): TeamMemberCard[] {
   if (!data?.length) {
     return fallbackTeamMembers.map((member) => ({
+      ...getTeamImagePresentation(member.name, Boolean(teamHeadshots[member.name])),
       name: member.name,
       role: member.role,
       focus: member.focus,
@@ -399,6 +400,7 @@ function normalizeTeam(data: SanityTeamMember[] | null | undefined): TeamMemberC
   }
 
   return data.map((member) => ({
+    ...getTeamImagePresentation(member.name, Boolean(member.profileImage)),
     name: member.name,
     role: member.role,
     focus: member.focus || "Team",
@@ -407,6 +409,30 @@ function normalizeTeam(data: SanityTeamMember[] | null | undefined): TeamMemberC
     featured: member.featured,
     image: toDisplayImage(member.profileImage, member.name) || contactImage
   }));
+}
+
+function getTeamImagePresentation(name: string, hasProfileImage: boolean): Pick<TeamMemberCard, "imageFit" | "imagePosition"> {
+  if (!hasProfileImage) {
+    return { imageFit: "contain", imagePosition: "50% 50%" };
+  }
+
+  if (name === "Wojtek Potaszkin") {
+    return { imageFit: "cover", imagePosition: "50% 20%" };
+  }
+
+  if (name === "Elaine O'Dwyer") {
+    return { imageFit: "cover", imagePosition: "50% 20%" };
+  }
+
+  if (name === "Sinead Doyle") {
+    return { imageFit: "cover", imagePosition: "50% 18%" };
+  }
+
+  if (name === "Elena Konopljova") {
+    return { imageFit: "cover", imagePosition: "50% 22%" };
+  }
+
+  return { imageFit: "cover", imagePosition: "50% 50%" };
 }
 
 function toTitleCase(value: string) {

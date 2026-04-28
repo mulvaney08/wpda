@@ -65,8 +65,8 @@ export default async function CompetitivePage() {
 
       <section className="section-wrap pb-12">
         <div className="grid gap-6 lg:grid-cols-2">
-          <ImagePanel image={images[1]} className="h-[470px] md:h-[534px]" />
-          <ImagePanel image={images[2]} className="h-[470px] md:h-[534px]" imgClassName="object-[0px_-75px]" />
+          <ImagePanel image={images[1]} className="aspect-[3/4]" />
+          <ImagePanel image={images[2]} className="aspect-[3/4]" />
         </div>
         <div className="surface mt-6 p-7 sm:p-8">
           <SectionHeading eyebrow="Featured Milestones" title="Recent WPDA success direction" />

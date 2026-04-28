@@ -34,7 +34,14 @@ export default async function TeamPage() {
           <SectionHeading eyebrow="Founder & Lead" title={featured.name} intro={featured.role} />
           <article className="surface mt-6 overflow-hidden">
             <div className="grid lg:grid-cols-5">
-              {featured.image ? <ImagePanel image={featured.image} className="rounded-none border-0 lg:col-span-2 lg:aspect-auto" /> : null}
+              {featured.image ? (
+                <ImagePanel
+                  image={featured.image}
+                  className="rounded-none border-0 lg:col-span-2 lg:aspect-auto"
+                  imgFit={featured.imageFit}
+                  imgStyle={{ objectPosition: featured.imagePosition ?? "50% 50%" }}
+                />
+              ) : null}
               <div className="p-7 sm:p-8 lg:col-span-3">
                 <p className="text-white/85">{featured.shortBio}</p>
                 <p className="mt-4 text-white/80">{featured.fullBio}</p>
@@ -49,7 +56,14 @@ export default async function TeamPage() {
         <div className="mt-8 grid gap-5 md:grid-cols-2">
           {others.map((member) => (
             <article key={member.name} className="surface overflow-hidden">
-              {member.image ? <ImagePanel image={member.image} className="aspect-[4/3] rounded-none border-0" /> : null}
+              {member.image ? (
+                <ImagePanel
+                  image={member.image}
+                  className="aspect-[4/3] rounded-none border-0"
+                  imgFit={member.imageFit}
+                  imgStyle={{ objectPosition: member.imagePosition ?? "50% 50%" }}
+                />
+              ) : null}
               <div className="p-6">
                 <p className="text-xs uppercase tracking-[0.18em] text-gold">{member.focus}</p>
                 <h2 className="mt-2 font-serif text-2xl">{member.name}</h2>

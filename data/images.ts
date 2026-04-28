@@ -133,10 +133,10 @@ export const competitiveImages = {
     height: 415
   },
   hug: {
-    src: "/images/wpda10.jpg",
+    src: "/images/mat_dak.webp",
     alt: "Young dancers celebrating after a performance",
-    width: 1440,
-    height: 1920
+    width: 960,
+    height: 1280
   }
 } as const;
 

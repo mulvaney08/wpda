@@ -7,9 +7,10 @@ type ImagePanelProps = {
   priority?: boolean;
   imgClassName?: string;
   imgStyle?: React.CSSProperties;
+  imgFit?: "cover" | "contain";
 };
 
-export function ImagePanel({ image, className, priority = false, imgClassName, imgStyle }: ImagePanelProps) {
+export function ImagePanel({ image, className, priority = false, imgClassName, imgStyle, imgFit = "cover" }: ImagePanelProps) {
   return (
     <div className={`overflow-hidden rounded-2xl border border-white/10 bg-black/25 ${className ?? ""}`}>
       <Image
@@ -17,7 +18,7 @@ export function ImagePanel({ image, className, priority = false, imgClassName, i
         alt={image.alt}
         width={image.width}
         height={image.height}
-        className={`h-full w-full object-cover ${imgClassName ?? ""}`}
+        className={`h-full w-full ${imgFit === "contain" ? "object-contain" : "object-cover"} ${imgClassName ?? ""}`}
         style={imgStyle}
         priority={priority}
       />

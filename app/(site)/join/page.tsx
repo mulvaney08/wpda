@@ -40,7 +40,7 @@ export default async function JoinPage() {
               </article>
             ))}
           </div>
-          <ImagePanel image={content.timetableImage} className="lg:col-span-2 aspect-[4/3]" />
+          <ImagePanel image={content.timetableImage} className="lg:col-span-2 aspect-[4/3]" imgFit="contain" />
         </div>
 
         <div className="surface mt-8 p-8 text-center">

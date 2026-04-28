@@ -13,19 +13,17 @@ type SiteHeaderClientProps = {
 
 export function SiteHeaderClient({ navLinks, academyName, tagline, whatsapp }: SiteHeaderClientProps) {
   const pathname = usePathname();
-  const [brandLine1] = academyName.split(" ");
+  const nameParts = academyName.split(" ");
+  const monogram = (nameParts[0]?.[0] ?? "") + (nameParts[1]?.[0] ?? "");
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-base/80 backdrop-blur-xl">
       <div className="section-wrap flex items-center justify-between py-4">
         <Link href="/" className="group inline-flex items-center gap-3">
-          <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-gold/70 text-sm font-semibold text-gold">
-            {brandLine1.slice(0, 2).toUpperCase()}
+          <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-gold/70 text-sm font-semibold text-gold">
+            {monogram}
           </span>
-          <span className="leading-tight">
-            <span className="block font-serif text-lg tracking-wide">{academyName}</span>
-            <span className="block text-xs uppercase tracking-[0.2em] text-white/70">{tagline}</span>
-          </span>
+          <span className="font-serif text-lg tracking-wide">{academyName}</span>
         </Link>
 
         <nav className="hidden items-center gap-7 md:flex" aria-label="Main navigation">
@@ -47,7 +45,7 @@ export function SiteHeaderClient({ navLinks, academyName, tagline, whatsapp }: S
 
         <div className="hidden md:block">
           <Link
-            href="/contact"
+            href="/join"
             className="rounded-full border border-gold/60 px-5 py-2 text-sm font-medium text-gold hover:bg-gold hover:text-black"
           >
             Join WPDA

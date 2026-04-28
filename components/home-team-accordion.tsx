@@ -41,7 +41,14 @@ export function HomeTeamAccordion({ members }: HomeTeamAccordionProps) {
       </div>
 
       <article className="surface overflow-hidden">
-        {active.image ? <ImagePanel image={active.image} className="aspect-[4/3] rounded-none border-0" imgClassName="object-[50%_32%]" /> : null}
+        {active.image ? (
+          <ImagePanel
+            image={active.image}
+            className="aspect-[4/3] rounded-none border-0"
+            imgFit={active.imageFit}
+            imgStyle={{ objectPosition: active.imagePosition ?? "50% 50%" }}
+          />
+        ) : null}
         <div className="p-5">
           <p className="text-xs uppercase tracking-[0.18em] text-gold">{active.focus}</p>
           <h3 className="mt-2 font-serif text-2xl">{active.name}</h3>

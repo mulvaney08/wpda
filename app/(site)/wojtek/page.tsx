@@ -31,7 +31,7 @@ export default async function WojtekPage() {
 
       <section className="section-wrap pb-12">
         <div className="grid gap-6 lg:grid-cols-5">
-          <ImagePanel image={page.heroImage} className="h-[520px] lg:col-span-2 lg:h-full" imgClassName="object-[-80px_0px]" priority />
+          <ImagePanel image={page.heroImage} className="h-[520px] lg:col-span-2 lg:h-full" imgStyle={{ objectPosition: "50% 50%" }} priority />
           <div className="lg:col-span-3">
             <SectionHeading
               eyebrow="Career Journey"
@@ -53,9 +53,16 @@ export default async function WojtekPage() {
       <section className="section-wrap pb-12">
         <SectionHeading eyebrow="Founder Portfolio" title="Professional profile and adjudication moments" />
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {page.gallery.map((image) => (
-            <ImagePanel key={image.src} image={image} className="aspect-square" />
-          ))}
+          {page.gallery.map((image) => {
+            const imagePosition =
+              image.alt === "Wojtek Potaszkin studio portrait"
+                ? "50% 18%"
+                : image.alt === "Wojtek Potaszkin judging detail"
+                  ? "50% 12%"
+                  : "50% 50%";
+
+            return <ImagePanel key={image.src} image={image} className="aspect-square" imgStyle={{ objectPosition: imagePosition }} />;
+          })}
         </div>
       </section>
 

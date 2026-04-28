@@ -33,6 +33,8 @@ export type TeamMemberCard = {
   fullBio?: string;
   featured?: boolean;
   image: DisplayImage | null;
+  imageFit?: "cover" | "contain";
+  imagePosition?: string;
 };
 
 export type SeoFields = {
