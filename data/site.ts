@@ -4,6 +4,7 @@ export const siteConfig = {
   domain: "https://wojtekdance.com",
   city: "Dublin",
   country: "Ireland",
+  tagline: "Dance Academy",
   email: "contact@replace-this-email.ie",
   phone: "+353858755367",
   whatsapp: "https://wa.me/353858755367?text=Hi%2C%20I%20got%20your%20WhatsApp%20information%20from%20your%20website.",
