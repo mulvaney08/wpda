@@ -5,7 +5,7 @@ import { getContactPage } from "@/sanity/lib/loaders";
 
 const contactPhone = "+353858755367";
 const whatsappUrl =
-  "https://api.whatsapp.com/send?phone=353858755367&text=Hi%2C%20I%20got%20your%20WhatsApp%20information%20from%20your%20website.";
+  "https://wa.me/353858755367?text=Hi%2C%20I%20got%20your%20WhatsApp%20information%20from%20your%20website.";
 const palmerstownMapsUrl = "https://maps.google.com/?q=Wojtek+Potaszkin+Dance+Academy+Palmerstown";
 const palmerstownMapEmbedUrl =
   "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2381.231564707825!2d-6.37729682275584!3d53.35701057392494!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48670d23b1062cb3%3A0x881b2319fc55f4b7!2sWojtek%20Potaszkin%20Dance%20Academy!5e0!3m2!1sen!2sie!4v1777418644329!5m2!1sen!2sie";
