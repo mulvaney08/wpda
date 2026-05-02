@@ -73,6 +73,8 @@ export function SiteHeaderClient({ navLinks, academyName, whatsapp }: SiteHeader
             {whatsapp ? (
               <a
                 href={whatsapp}
+                target="_blank"
+                rel="noreferrer"
                 onClick={() => mobileMenuRef.current?.removeAttribute("open")}
                 className="mt-2 block rounded-lg bg-gold px-3 py-2 text-center text-sm font-medium text-black"
               >

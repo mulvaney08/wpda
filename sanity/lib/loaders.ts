@@ -100,14 +100,16 @@ export const getSiteShell = cache(async (): Promise<SiteShell> => {
     { platform: "youtube", url: siteConfig.youtube }
   ].filter((item, index, list) => list.findIndex((entry) => entry.platform.toLowerCase() === item.platform.toLowerCase()) === index);
 
+  const siteWhatsapp = data?.whatsapp && data.whatsapp !== "#" ? data.whatsapp : siteConfig.whatsapp;
+
   return {
     academyName: data?.academyName || siteConfig.name,
     shortName: data?.shortName || siteConfig.shortName,
-    tagline: data?.tagline || "Dance Academy",
+    tagline: data?.tagline || siteConfig.tagline,
     domain: data?.domain || siteConfig.domain,
     primaryEmail: data?.primaryEmail || siteConfig.email,
     primaryPhone: data?.primaryPhone || siteConfig.phone,
-    whatsapp: data?.whatsapp || siteConfig.whatsapp,
+    whatsapp: siteWhatsapp,
     addressText: data?.addressText || `${siteConfig.city}, ${siteConfig.country}`,
     footerText:
       data?.footerText ||
