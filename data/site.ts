@@ -30,25 +30,25 @@ export const styleCards = [
   {
     title: "Ballroom",
     description:
-      "Precision, posture and partnership-led training in Standard and Smooth-inspired foundations for social and competitive dancers.",
+      "A gentle, confidence-building way to learn posture, movement and partner work at a comfortable pace.",
     accent: "from-gold/50 to-transparent"
   },
   {
     title: "Latin",
     description:
-      "Rhythm, performance quality and technical clarity across core Latin disciplines with progressive class pathways.",
+      "Lively classes full of rhythm, expression and music, with encouragement for every level of dancer.",
     accent: "from-crimson/50 to-transparent"
   },
   {
     title: "Breaking",
     description:
-      "Athletic fundamentals, musicality and battle confidence for young dancers building strong movement vocabulary.",
+      "Energetic classes where young dancers can build strength, musicality and their own creative style.",
     accent: "from-electric/50 to-transparent"
   },
   {
     title: "Hip-Hop",
     description:
-      "High-energy choreography classes that develop timing, confidence and stage presence from beginner level upward.",
+      "Upbeat choreography that helps dancers find their timing, confidence and stage presence.",
     accent: "from-white/30 to-transparent"
   }
 ];
@@ -73,21 +73,21 @@ export const classCategories = [
         name: "Beginner Children Classes",
         audience: "Children and pre-teens",
         description:
-          "Structured classes across Ballroom, Latin and street styles that build confidence, discipline and joy in dance.",
+          "Friendly classes across Ballroom, Latin and street styles that help children build confidence and joy in dance.",
         partnerRequired: "Not required"
       },
       {
         name: "Breaking & Hip-Hop",
         audience: "Kids and teens",
         description:
-          "Technique-led urban styles with age-appropriate progressions for both recreational and ambitious dancers.",
+          "Energetic street styles where kids and teens can learn safely, express themselves and have fun.",
         partnerRequired: "No"
       },
       {
         name: "Competitive Youth Training",
         audience: "Committed young dancers",
         description:
-          "Focused coaching for dancers aiming for Irish and international events, including performance quality and mindset preparation.",
+          "Supportive coaching for dancers who feel ready to try events, performances or a more focused class.",
         partnerRequired: "Solo and partner options"
       }
     ]
@@ -106,7 +106,7 @@ export const classCategories = [
         name: "Adult Competitive & Performance",
         audience: "Experienced adults",
         description:
-          "Technique refinement, choreography and competition-readiness for dancers pursuing higher-level goals.",
+          "Friendly coaching for adults who want to polish routines, perform or prepare for events.",
         partnerRequired: "Recommended for partner events"
       }
     ]
@@ -118,28 +118,28 @@ export const classCategories = [
         name: "Private Lessons",
         audience: "All ages and levels",
         description:
-          "One-to-one or pair coaching designed around individual goals, from first steps to championship preparation.",
+          "One-to-one or pair coaching shaped around the dancer, from first steps to performance goals.",
         partnerRequired: "Optional"
       },
       {
         name: "Practice Sessions",
         audience: "Current dancers",
         description:
-          "Supervised practice time for dancers to consolidate technique and routines with coach guidance.",
+          "Guided practice time where dancers can ask questions, repeat routines and feel more confident.",
         partnerRequired: "Optional"
       },
       {
         name: "Wedding Dance Lessons",
         audience: "Couples",
         description:
-          "Tailored choreography and confidence coaching for memorable first dances with a polished finish.",
+          "Relaxed, tailored lessons to help couples feel comfortable and enjoy their first dance.",
         partnerRequired: "Yes"
       },
       {
         name: "Workshops",
         audience: "Open level",
         description:
-          "Focused intensives delivered by academy coaches and guest specialists to accelerate progress.",
+          "One-off sessions and guest workshops that let dancers try something new and learn together.",
         partnerRequired: "Depends on workshop"
       }
     ]
@@ -151,9 +151,9 @@ export const teamMembers = [
     name: "Wojtek Potaszkin",
     role: "Founder, Director and Principal Teacher",
     focus: "Ballroom & Latin",
-    bio: "Wojtek is the Director and Principal Teacher at WPDA. He started his dance journey as a little boy in Poland, competing successfully and reaching the finals of all major competitions. Upon moving to Ireland in 2009, he quickly ranked as the best dancer and competed internationally representing the country across Europe and USA.",
+    bio: "Wojtek is the Director and Principal Teacher at WPDA. He started dancing as a little boy in Poland and brings a lifetime of Ballroom and Latin experience to the academy. Since moving to Ireland in 2009, he has shared that experience with dancers of all ages.",
     extra:
-      "In 2017, Wojtek was awarded with the highest grades in his professional Standard and Latin exams and he now proudly holds full Irish National, DanceSport Adjudicator Licence. In 2020, he received the World DanceSport Federation Adjudicator Licence – the highest judging license there is for DanceSport competitions around the world. Being a WDSF judge, Wojtek travels to the best competitions in the world to share his knowledge with aspiring professional dancers, apart from adjudicating alongside highly esteemed panels. He has starred in a number of TV commercials and appeared on Irish TV shows. He is the most-loved teacher at the Academy, highly respected and looked up to by all his students. When not working, he enjoys going for challenging runs and wouldn't say no to a good ol' Sunday roast!",
+      "Wojtek holds Irish National and World DanceSport Federation adjudicator licences, and brings that depth of knowledge into the studio in a calm, approachable way. Students know him as a supportive teacher who cares about confidence, progress and the joy of dancing.",
     featured: true
   },
   {
@@ -167,15 +167,15 @@ export const teamMembers = [
     name: "Sinead Doyle",
     role: "Ballroom & Latin Coach",
     focus: "Ballroom & Latin",
-    bio: "Sinead is a seasoned competitor and coach at WPDA, bringing over 13 years of dedication to the world of dance. With 4 years of coaching experience in both Standard and Latin disciplines, she's known for her dynamic teaching style and passion for performance. Her competitive journey has earned her numerous national and international titles, showcasing her talent at premier World DanceSport Federation events across the globe.",
-    extra: "Beyond the competition floor, Sinead has graced television screens and stages through a wide range of shows and showcases. She also serves as a creative force behind WPDA's team choreography, crafting standout performances for events and community festivals. Her energy, expertise, and love for dance continue to inspire the next generation of dancers."
+    bio: "Sinead brings over 13 years of dance experience to WPDA, with a warm, energetic teaching style across Standard and Latin. She helps dancers enjoy the work, understand the music and feel more confident in their movement.",
+    extra: "Beyond classes, Sinead supports team choreography, shows, showcases and community events. Her energy and love for dance help younger dancers feel excited about learning."
   },
   {
     name: "Volodymyr Belei",
     role: "Ballroom Coach",
     focus: "Ballroom",
     bio: "Volodymyr is a WDSF licensed adjudicator, choreographer and dance educator with over 30 years of teaching experience, working with both children and adults. After graduating from college and university with a degree in choreography, he dedicated his life to the dance world.",
-    extra: "His career includes training beginners as well as coaching competitive dancers to the highest levels. In Ukraine, he achieved significant success as a coach and leader in the dance industry, and now brings the same passion to Ireland."
+    extra: "His career includes helping beginners find their footing as well as supporting dancers who want to grow further. He brings patience, experience and a deep love of dance to Ireland."
   },
   {
     name: "Zhenya Kovalenko",
@@ -188,7 +188,7 @@ export const teamMembers = [
     name: "Elena Konopljova",
     role: "Fitness Coach",
     focus: "Fitness & Conditioning",
-    bio: "Elena is a highly qualified physical training instructor (spin classes, body pump classes, strength and conditioning, step aerobics), Personal trainer, Yoga teacher, Bodybuilding coach - with many years of experience.",
+    bio: "Elena is an experienced physical training instructor across spin, body pump, strength and conditioning, step aerobics, personal training, yoga and bodybuilding coaching.",
     extra: "She will provide coaching for our dancers to help with strength, stamina, flexibility and cardio fitness."
   },
   {
@@ -196,58 +196,58 @@ export const teamMembers = [
     role: "Studio Manager",
     focus: "Operations",
     bio: "Cathy has over 15 years' experience in the dance industry as both dance parent and as manager of our studio. Having previously worked in childcare industry, Cathy has almost 10 years experience in the financial services industry and is QFA Financial Advisor qualified.",
-    extra: "Cathy is the first person many of our new students and parents meet and is always available to help with class decisions, payments, lessons, shoes, dresses and much more. As studio manager she takes care of all studio rentals, marketing, payments & billing, lesson scheduling and teaching schedules. Cathy is also a dedicated and professional dance mom so there is no competition questions she cannot answer."
+    extra: "Cathy is often the first person new students and parents meet. She is always happy to help with class choices, payments, lessons, shoes, dresses and the many little questions that come with joining a dance academy."
   },
   {
     name: "LesleyAnn Jones",
     role: "Child Liaison Officer",
     focus: "Student Wellbeing",
-    bio: "LesleyAnn is our designated Child Liaison Person with over 15 years' experience working as a childcare professional. She manages all the teaching staff requirements to ensure everyone is up to date with relevant Garda Vetting, Child protection training and First Aid.",
-    extra: "LesleyAnn is available for any questions, concerns or suggestions that parents have to make our studio a safe space for all children and adults to train and enjoy. She has worked tirelessly to ensure we maintain the highest standards in the industry."
+    bio: "LesleyAnn is our designated Child Liaison Person with over 15 years' experience working in childcare. She helps keep our team up to date with Garda Vetting, child protection training and First Aid.",
+    extra: "LesleyAnn is available for questions, concerns or suggestions from parents, and helps make the studio a safe, welcoming space for children and adults to train and enjoy."
   }
 ];
 
 export const successHighlights = [
-  "Dancers progressing from first classes to national-level competition pathways",
-  "Regular participation in Irish and international dance events",
-  "Students representing Ireland in competitive Ballroom and Latin settings",
-  "Ongoing academy milestones celebrated through WPDA news and event updates"
+  "Children growing from nervous first classes into confident performers",
+  "Friendly preparation for Irish and international dance events",
+  "Students proudly representing Ireland in Ballroom and Latin settings",
+  "Academy milestones celebrated with families, dancers and the wider WPDA community"
 ];
 
 export const valuePillars = [
   {
-    title: "World-Class Coaching",
-    text: "Experienced coaches blend high standards with clear, supportive instruction."
+    title: "Kind Coaching",
+    text: "Experienced coaches help dancers learn with patience, warmth and clear guidance."
   },
   {
-    title: "Pathways For All Levels",
-    text: "From complete beginner to serious competitor, dancers can grow at the right pace."
+    title: "Space To Grow",
+    text: "Beginners can settle in gently, and motivated dancers can keep growing when they are ready."
   },
   {
-    title: "Family Partnership",
-    text: "WPDA works closely with parents to create consistency, trust and long-term progress."
+    title: "Parents Included",
+    text: "We help parents understand the class options and feel confident about the next step."
   },
   {
-    title: "Safe, Positive Culture",
-    text: "A caring studio atmosphere where children, teens and adults feel welcome and respected."
+    title: "A Friendly Studio",
+    text: "A caring atmosphere where children, teens and adults feel welcome, safe and respected."
   }
 ];
 
 export const faqs = [
   {
     q: "Do I need a partner to join?",
-    a: "No. Many classes are designed for solo participation, and partner options are available for Ballroom and Latin pathways."
+    a: "No. Many dancers join on their own, and we can explain partner options if Ballroom or Latin is the right fit."
   },
   {
     q: "Are beginners welcome?",
-    a: "Yes. WPDA runs beginner-friendly classes for children, teens and adults with clear progression into higher levels."
+    a: "Yes. Beginners are very welcome, and we will help you choose a class that feels comfortable."
   },
   {
     q: "Can dancers move into competitions?",
-    a: "Yes. Dancers showing commitment can transition into competition-focused coaching and event preparation."
+    a: "Yes. If a dancer becomes interested in events, we can guide that step when they are ready."
   },
   {
     q: "Do you offer private sessions?",
-    a: "Yes. Private lessons are available for technical development, choreography and competition goals."
+    a: "Yes. Private lessons are available for extra support, choreography, confidence or event preparation."
   }
 ];

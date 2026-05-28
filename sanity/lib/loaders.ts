@@ -22,18 +22,15 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { client } from "@/sanity/lib/client";
 import { toDisplayImage } from "@/sanity/lib/image";
 import {
-  academyPageQuery,
   classCategoriesQuery,
   competitionPageQuery,
   contactPageQuery,
   galleryImagesQuery,
-  homepageQuery,
   joinPageQuery,
   newsArticleBySlugQuery,
   newsArticleSlugsQuery,
   newsArticlesQuery,
   pageSeoByKeyQuery,
-  siteSettingsQuery,
   teamMembersQuery,
   testimonialsQuery,
   wojtekGalleryFallbackQuery,
@@ -76,21 +73,17 @@ type SanityNewsArticle = {
 };
 
 export const getSiteShell = cache(async (): Promise<SiteShell> => {
-  const { data } = await sanityFetch({ query: siteSettingsQuery, tags: ["siteSettings"] });
-
-  const baseNavLinks = (data?.navLinks?.length ? data.navLinks : fallbackNavLinks) as NavLink[];
+  const baseNavLinks = fallbackNavLinks as NavLink[];
   const navLinks = baseNavLinks.some((link) => link.href === "/news-success")
     ? baseNavLinks
     : [...baseNavLinks, { href: "/news-success", label: "News & Success" }];
 
-  const baseSocialLinks = (data?.socialLinks?.length
-    ? data.socialLinks
-    : [
-        { platform: "facebook", url: siteConfig.facebook },
-        { platform: "instagram", url: siteConfig.instagram },
-        { platform: "twitter", url: siteConfig.twitter },
-        { platform: "youtube", url: siteConfig.youtube }
-      ]) as { platform: string; url: string }[];
+  const baseSocialLinks = [
+    { platform: "facebook", url: siteConfig.facebook },
+    { platform: "instagram", url: siteConfig.instagram },
+    { platform: "twitter", url: siteConfig.twitter },
+    { platform: "youtube", url: siteConfig.youtube }
+  ] as { platform: string; url: string }[];
 
   const socialLinks = [
     ...baseSocialLinks,
@@ -100,33 +93,57 @@ export const getSiteShell = cache(async (): Promise<SiteShell> => {
     { platform: "youtube", url: siteConfig.youtube }
   ].filter((item, index, list) => list.findIndex((entry) => entry.platform.toLowerCase() === item.platform.toLowerCase()) === index);
 
-  const siteWhatsapp = data?.whatsapp && data.whatsapp !== "#" ? data.whatsapp : siteConfig.whatsapp;
-
   return {
-    academyName: data?.academyName || siteConfig.name,
-    shortName: data?.shortName || siteConfig.shortName,
-    tagline: data?.tagline || siteConfig.tagline,
-    domain: data?.domain || siteConfig.domain,
-    primaryEmail: data?.primaryEmail || siteConfig.email,
-    primaryPhone: data?.primaryPhone || siteConfig.phone,
-    whatsapp: siteWhatsapp,
-    addressText: data?.addressText || `${siteConfig.city}, ${siteConfig.country}`,
-    footerText:
-      data?.footerText ||
-      "Premium Ballroom, Latin, Breaking and Hip-Hop training in Dublin for children, teens, adults and competitive dancers.",
+    academyName: siteConfig.name,
+    shortName: siteConfig.shortName,
+    tagline: siteConfig.tagline,
+    domain: siteConfig.domain,
+    primaryEmail: siteConfig.email,
+    primaryPhone: siteConfig.phone,
+    whatsapp: siteConfig.whatsapp,
+    addressText: `${siteConfig.city}, ${siteConfig.country}`,
+    footerText: "Welcoming Ballroom, Latin, Breaking and Hip-Hop classes in Dublin for children, teens and adults.",
     socialLinks,
-    defaultSeo: data?.defaultSeo,
+    defaultSeo: {
+      title: `${siteConfig.name} | Dance Academy Dublin`,
+      description: "Welcoming dance classes in Dublin for children, teens and adults across Ballroom, Latin, Breaking and Hip-Hop."
+    },
     navLinks
   };
 });
 
 export const getHomepageContent = cache(async () => {
-  const [{ data: home }, { data: categories }, { data: team }, { data: testimonials }] = await Promise.all([
-    sanityFetch({ query: homepageQuery, tags: ["homepage"] }),
+  const [{ data: categories }, { data: team }, { data: testimonials }] = await Promise.all([
     sanityFetch({ query: classCategoriesQuery, tags: ["classCategory"] }),
     sanityFetch({ query: teamMembersQuery, tags: ["teamMember"] }),
     sanityFetch({ query: testimonialsQuery, tags: ["testimonial"] })
   ]);
+  const home = undefined as
+    | {
+        styles?: { title: string; description: string; image?: Parameters<typeof toDisplayImage>[0] }[];
+        heroEyebrow?: string;
+        heroHeadline?: string;
+        heroSubheadline?: string;
+        heroPrimaryCta?: { label: string; href: string };
+        heroSecondaryCta?: { label: string; href: string };
+        heroImage?: Parameters<typeof toDisplayImage>[0];
+        introEyebrow?: string;
+        introTitle?: string;
+        introText?: string;
+        introImages?: unknown[];
+        stylesSectionTitle?: string;
+        competitiveHighlights?: { text: string }[];
+        valuePillars?: { title: string; text: string }[];
+        teamSectionTitle?: string;
+        galleryPreviewImages?: unknown[];
+        finalCtaEyebrow?: string;
+        finalCtaTitle?: string;
+        finalCtaText?: string;
+        finalPrimaryCta?: { label: string; href: string };
+        finalSecondaryCta?: { label: string; href: string };
+        seo?: SeoFields;
+      }
+    | undefined;
 
   const stylesFromSanity = (home?.styles || [])
     .map((style: { title: string; description: string; image?: Parameters<typeof toDisplayImage>[0] }) => {
@@ -154,23 +171,23 @@ export const getHomepageContent = cache(async () => {
   }));
 
   return {
-    heroEyebrow: home?.heroEyebrow || "Dance Academy",
-    heroHeadline: home?.heroHeadline || "High-level training with a warm, supportive academy culture.",
+    heroEyebrow: home?.heroEyebrow || "Dance Academy Dublin",
+    heroHeadline: home?.heroHeadline || "A friendly place for your child to start dancing.",
     heroSubheadline:
       home?.heroSubheadline ||
-      "WPDA welcomes children, teens and adults into Ballroom, Latin, Breaking and Hip-Hop. Beginners feel comfortable from day one, and committed dancers can grow toward competitive goals.",
-    heroPrimaryCta: home?.heroPrimaryCta || { label: "Find Your Class", href: "/classes" },
-    heroSecondaryCta: home?.heroSecondaryCta || { label: "Talk To The Academy", href: "/contact" },
+      "At WPDA, children, teens and adults can try Ballroom, Latin, Breaking and Hip-Hop in a warm, encouraging studio. No experience is needed, just come as you are and we will help you find the right class.",
+    heroPrimaryCta: home?.heroPrimaryCta || { label: "Find The Right Class", href: "/classes" },
+    heroSecondaryCta: home?.heroSecondaryCta || { label: "Ask Us A Question", href: "/contact" },
     heroImage: toDisplayImage(home?.heroImage, "Hero image") || homepageImages.hero,
-    introEyebrow: home?.introEyebrow || "Academy Atmosphere",
-    introTitle: home?.introTitle || "Serious standards, encouraging experience",
+    introEyebrow: home?.introEyebrow || "For Families",
+    introTitle: home?.introTitle || "A studio where dancers are known by name",
     introText:
       home?.introText ||
-      "Families trust WPDA because dancers are coached with care, clear structure and positive discipline. We focus on progress, confidence and enjoyment in equal measure.",
+      "Starting something new can feel like a big step. Our coaches make it easier with friendly guidance, clear routines and a positive atmosphere where children can settle in, build confidence and enjoy moving.",
     introImages: (home?.introImages || [])
       .map((item: unknown, index: number) => toDisplayImage(item as never, `Intro image ${index + 1}`))
       .filter(Boolean) as DisplayImage[],
-    styleTitle: home?.stylesSectionTitle || "Four disciplines. One academy standard.",
+    styleTitle: home?.stylesSectionTitle || "Let them try a style that feels fun.",
     styles: stylesFromSanity.length ? stylesFromSanity : fallbackStyles,
     categories: categories?.length
       ? categories
@@ -183,18 +200,18 @@ export const getHomepageContent = cache(async () => {
       ? home.competitiveHighlights.map((item: { text: string }) => item.text)
       : successHighlights,
     valuePillars: home?.valuePillars?.length ? home.valuePillars : fallbackValuePillars,
-    teamSectionTitle: home?.teamSectionTitle || "Guided by experienced coaches and caring academy staff",
+    teamSectionTitle: home?.teamSectionTitle || "Supportive coaches, friendly faces",
     teamPreview: normalizeTeam(team),
     galleryPreviewImages: (home?.galleryPreviewImages || [])
       .map((item: unknown, index: number) => toDisplayImage(item as never, `Gallery preview ${index + 1}`))
       .filter(Boolean) as DisplayImage[],
-    finalCtaEyebrow: home?.finalCtaEyebrow || "Start Your Journey",
-    finalCtaTitle: home?.finalCtaTitle || "Everyone can start with confidence at WPDA",
+    finalCtaEyebrow: home?.finalCtaEyebrow || "Start Here",
+    finalCtaTitle: home?.finalCtaTitle || "Come say hello and we will help you choose.",
     finalCtaText:
       home?.finalCtaText ||
-      "If you are choosing a first class for your child, returning to dance as an adult, or aiming toward competition, we will help you find the right next step.",
-    finalPrimaryCta: home?.finalPrimaryCta || { label: "View Timetable Pathways", href: "/join" },
-    finalSecondaryCta: home?.finalSecondaryCta || { label: "WhatsApp Inquiry", href: siteConfig.whatsapp },
+      "Tell us your child's age, experience and interests, and we will point you toward a class that feels like a good first step.",
+    finalPrimaryCta: home?.finalPrimaryCta || { label: "Start Here", href: "/join" },
+    finalSecondaryCta: home?.finalSecondaryCta || { label: "Message Us On WhatsApp", href: siteConfig.whatsapp },
     testimonials: testimonials || [],
     seo: home?.seo
   };
@@ -233,21 +250,21 @@ export const getTeamMembers = cache(async () => {
 });
 
 export const getAcademyPage = cache(async () => {
-  const { data } = await sanityFetch({ query: academyPageQuery, tags: ["academyPage"] });
   return {
-    pageTitle: data?.pageTitle || "Built on dedication, attitude and passion",
+    pageTitle: "A dance academy where families feel at home",
     introCopy:
-      data?.introCopy ||
-      "Wojtek Potaszkin Dance Academy is a Dublin dance community where high standards and a genuinely caring atmosphere grow side by side.",
-    academyPhilosophy: data?.academyPhilosophy,
-    supportiveEnvironment: data?.supportiveEnvironment,
-    parentFamilyMessaging: data?.parentFamilyMessaging,
-    pathwayMessaging: data?.pathwayMessaging,
-    valuePillars: data?.valuePillars?.length ? data.valuePillars : fallbackValuePillars,
-    supportingImages: (data?.supportingImages || [])
-      .map((item: unknown, index: number) => toDisplayImage(item as never, `About image ${index + 1}`))
-      .filter(Boolean) as DisplayImage[],
-    seo: data?.seo,
+      "WPDA is a friendly Dublin dance community where children, teens and adults can feel welcome, build confidence and enjoy learning from coaches who care.",
+    academyPhilosophy:
+      "We keep classes clear, upbeat and encouraging. Dancers learn the foundations properly, but they are also given space to relax, enjoy the music and feel proud of small wins along the way.",
+    supportiveEnvironment:
+      "New dancers are never expected to know what to do straight away. Coaches explain each step, check in often and help every student feel included from the beginning.",
+    parentFamilyMessaging:
+      "Choosing a class for your child can bring a lot of questions. We are happy to talk through age groups, styles, timetables and what to expect before they arrive.",
+    pathwayMessaging:
+      "As dancers grow, we keep the next step clear, whether that means building confidence in class, trying a new style or preparing for a performance.",
+    valuePillars: fallbackValuePillars,
+    supportingImages: [],
+    seo: undefined,
     fallbackImages: [aboutImages.community, aboutImages.academyLife, aboutImages.support]
   };
 });
@@ -257,14 +274,14 @@ export const getCompetitionPage = cache(async () => {
   return {
     intro:
       data?.intro ||
-      "WPDA offers a structured performance and competition pathway backed by technical coaching, strategic preparation and strong team support.",
+      "When a dancer is ready for performances or competitions, WPDA helps them take that step with encouragement, clear coaching and steady support.",
     pathway: data?.competitiveTrainingPathway?.length
       ? data.competitiveTrainingPathway.map((item: { text: string }) => item.text)
       : [
-          "Foundation technique and movement quality",
-          "Performance mindset and choreography blocks",
-          "Partnering, floorcraft and event simulation",
-          "National and international event preparation"
+          "Build strong basics with patient coaching",
+          "Learn routines and performance confidence",
+          "Practice with feedback and encouragement",
+          "Prepare calmly for events when ready"
         ],
     achievements:
       data?.featuredAchievements?.length
@@ -296,15 +313,15 @@ export const getWojtekPage = cache(async () => {
     headline: profile?.headline || "Wojtek Potaszkin",
     intro:
       profile?.intro ||
-      "Wojtek built WPDA to combine discipline, passion and elite dance standards in a supportive academy structure for every generation of dancer.",
+      "Wojtek built WPDA as a place where dancers can learn well, feel encouraged and enjoy the confidence that dance brings.",
     heroImage: toDisplayImage(profile?.heroImage, "Wojtek hero") || wojtekGallery[0],
     biographySections: profile?.biographySections?.length
       ? profile.biographySections.map((item: { text: string }) => item.text)
       : [
-          "Started dancing in Poland as a child and developed a strong competitive foundation.",
-          "Built successful competition results and international dance experience.",
-          "Moved to Ireland in 2009 and rose to become one of the country's top dancers.",
-          "Competed internationally while expanding his role as coach and academy leader."
+          "Started dancing in Poland as a child and fell in love with Ballroom and Latin.",
+          "Built a rich competition background and international dance experience.",
+          "Moved to Ireland in 2009 and became a trusted teacher and academy leader.",
+          "Now shares his experience with dancers of all ages in a warm, supportive studio."
         ],
     qualifications: profile?.qualifications || [],
     achievements: profile?.achievements || [],
@@ -348,7 +365,7 @@ export const getContactPage = cache(async () => {
     heading: page?.heading || "Let's find the right class for you",
     introText:
       page?.introText ||
-      "Children and adults are welcome, including complete beginners. Reach out and we will guide you toward the right class pathway.",
+      "Children and adults are welcome, including complete beginners. Send us a message and we will help you choose a comfortable first class.",
     contactGuidance: page?.contactGuidance,
     inquiryCtaText: page?.inquiryCtaText || "Send Inquiry",
     openingContactNotes: page?.openingContactNotes,
@@ -364,29 +381,29 @@ export const getJoinPage = cache(async () => {
 
   return {
     eyebrow: data?.eyebrow || "Join WPDA",
-    title: data?.title || "Find your timetable pathway",
+    title: data?.title || "Let's find the right class together",
     intro:
       data?.intro ||
-      "Class slots vary by age group, level and season. Contact the academy for current timetable guidance and placement support.",
-    ctaLabel: data?.ctaLabel || "Request Current Timetable",
+      "Tell us a little about the dancer and we will help with class times, age groups and the best place to begin.",
+    ctaLabel: data?.ctaLabel || "Ask About Classes",
     ctaHref: data?.ctaHref || "/contact",
     pathways:
       data?.pathways || [
         {
-          title: "Children Starter Path",
-          text: "Introductory classes including Baby Ballroom and beginner youth foundations."
+          title: "Young Beginners",
+          text: "Gentle first classes for children who are ready to try dance in a friendly group."
         },
         {
-          title: "Teen Development Path",
-          text: "Style progression through Ballroom/Latin and Breaking/Hip-Hop training blocks."
+          title: "Teens",
+          text: "Welcoming classes where teens can build confidence, learn technique and enjoy their chosen style."
         },
         {
-          title: "Adult Beginner Path",
-          text: "Supportive classes for adults learning solo or as a couple in a no-pressure setting."
+          title: "Adults",
+          text: "Supportive classes for adults learning solo or as a couple in a relaxed setting."
         },
         {
-          title: "Competitive Path",
-          text: "Coaching intensity and performance preparation for dancers targeting events."
+          title: "Ready For More",
+          text: "For dancers who want performances or competitions, we can guide the next step when the time feels right."
         }
       ],
     timetableImage:
@@ -399,8 +416,8 @@ export const getJoinPage = cache(async () => {
     howToStartTitle: data?.howToStartTitle || "How to start",
     howToStartText:
       data?.howToStartText ||
-      "Share your dancer’s age, current experience and preferred style. WPDA will recommend the best class and next available option.",
-    primaryCtaLabel: data?.primaryCtaLabel || "Contact Academy Team",
+      "Share your dancer's age, current experience and any style they are curious about. We will recommend a class and explain what to expect.",
+    primaryCtaLabel: data?.primaryCtaLabel || "Ask Us A Question",
     primaryCtaHref: data?.primaryCtaHref || "/contact",
     secondaryCtaLabel: data?.secondaryCtaLabel || "View Class Types",
     secondaryCtaHref: data?.secondaryCtaHref || "/classes",

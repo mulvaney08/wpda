@@ -5,14 +5,42 @@ import { SectionHeading } from "@/components/section-heading";
 import { ImagePanel } from "@/components/image-panel";
 import { getAcademyPage } from "@/sanity/lib/loaders";
 
+const aboutCopy = {
+  heroTitle: "A dance academy where families feel at home",
+  heroIntro:
+    "WPDA is a friendly Dublin dance community where children, teens and adults can feel welcome, build confidence and enjoy learning from coaches who care.",
+  teaching:
+    "We keep classes clear, upbeat and encouraging. Dancers learn the foundations properly, but they are also given space to relax, enjoy the music and feel proud of small wins along the way.",
+  support:
+    "New dancers are never expected to know what to do straight away. Coaches explain each step, check in often and help every student feel included from the beginning.",
+  parents:
+    "Choosing a class for your child can bring a lot of questions. We are happy to talk through age groups, styles, timetables and what to expect before they arrive.",
+  nextSteps:
+    "As dancers grow, we keep the next step clear, whether that means building confidence in class, trying a new style or preparing for a performance.",
+  values: [
+    {
+      title: "Kind Coaching",
+      text: "Experienced coaches help dancers learn with patience, warmth and clear guidance."
+    },
+    {
+      title: "Space To Grow",
+      text: "Beginners can settle in gently, and motivated dancers can keep growing when they are ready."
+    },
+    {
+      title: "Parents Included",
+      text: "We help parents understand the class options and feel confident about the next step."
+    },
+    {
+      title: "A Friendly Studio",
+      text: "A caring atmosphere where children, teens and adults feel welcome, safe and respected."
+    }
+  ]
+};
+
 export async function generateMetadata(): Promise<Metadata> {
-  const page = await getAcademyPage();
   return {
-    title: page.seo?.title || "About The Academy",
-    description:
-      page.seo?.description ||
-      "Learn about WPDA's mission, coaching philosophy and supportive class culture for children, adults and competitive dancers in Dublin.",
-    robots: page.seo?.noindex ? { index: false, follow: false } : undefined
+    title: "About WPDA",
+    description: "Meet WPDA, a welcoming Dublin dance academy where children, teens and adults can feel comfortable, supported and excited to dance."
   };
 }
 
@@ -24,17 +52,17 @@ export default async function AboutPage() {
     <>
       <PageHero
         eyebrow="About WPDA"
-        title={page.pageTitle}
-        intro={page.introCopy}
-        ctaLabel="Meet The Team"
+        title={aboutCopy.heroTitle}
+        intro={aboutCopy.heroIntro}
+        ctaLabel="Meet The Coaches"
         ctaHref="/team"
       />
 
       <section className="section-wrap pb-12">
         <SectionHeading
-          eyebrow="Who We Serve"
-          title="From first-time beginners to competition-focused dancers"
-          intro="WPDA welcomes very young children, teens and adults. Every dancer is supported with clear progression, positive coaching and a class environment that feels motivating and safe."
+          eyebrow="Who We Welcome"
+          title="A comfortable first step for children, teens and adults"
+          intro="Some dancers arrive full of confidence. Others need a little reassurance before they join in. Both are welcome here. We help each dancer settle, make friends and enjoy learning at a pace that feels right."
         />
         <div className="mt-8 grid gap-4 md:grid-cols-3">
           <ImagePanel image={images[0]} className="h-80 md:h-96" />
@@ -46,25 +74,25 @@ export default async function AboutPage() {
       <section className="section-wrap pb-12">
         <div className="grid gap-5 md:grid-cols-2">
           <article className="surface p-7">
-            <h2 className="font-serif text-3xl">Our Teaching Philosophy</h2>
-            <p className="mt-4 text-white/80">{page.academyPhilosophy || "Great dance training combines technical precision with emotional confidence. WPDA coaches focus on fundamentals, musicality, performance expression and healthy long-term habits."}</p>
-            <p className="mt-4 text-white/80">{page.supportiveEnvironment || "Beginners are welcomed with patience, while experienced dancers are guided toward advanced goals with structure and accountability."}</p>
+            <h2 className="text-3xl font-semibold">How We Teach</h2>
+            <p className="mt-4 text-white/85">{aboutCopy.teaching}</p>
+            <p className="mt-4 text-white/85">{aboutCopy.support}</p>
           </article>
           <article className="surface p-7">
-            <h2 className="font-serif text-3xl">Parents & Dancers Partnership</h2>
-            <p className="mt-4 text-white/80">{page.parentFamilyMessaging || "The academy works closely with families through transparent communication, class guidance and practical support around events and milestones."}</p>
-            <p className="mt-4 text-white/80">{page.pathwayMessaging || "This partnership helps dancers stay confident, happy and consistent as they progress."}</p>
+            <h2 className="text-3xl font-semibold">Parents Are Part Of It</h2>
+            <p className="mt-4 text-white/85">{aboutCopy.parents}</p>
+            <p className="mt-4 text-white/85">{aboutCopy.nextSteps}</p>
           </article>
         </div>
       </section>
 
       <section className="section-wrap pb-12">
-        <SectionHeading eyebrow="Core Values" title="What shapes the WPDA studio culture" />
+        <SectionHeading eyebrow="What Matters To Us" title="A studio culture families can trust" />
         <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {page.valuePillars.map((pillar: { title: string; text: string }) => (
+          {aboutCopy.values.map((pillar) => (
             <article key={pillar.title} className="surface p-5">
               <h3 className="font-semibold">{pillar.title}</h3>
-              <p className="mt-3 text-sm text-white/80">{pillar.text}</p>
+              <p className="mt-3 text-sm text-white/85">{pillar.text}</p>
             </article>
           ))}
         </div>
@@ -72,12 +100,12 @@ export default async function AboutPage() {
 
       <section className="section-wrap py-14">
         <div className="surface p-8 sm:p-10">
-          <h2 className="font-serif text-4xl">Beginner to Competitive, Step by Step</h2>
-          <p className="mt-4 max-w-3xl text-white/80">
-            Dancers can start with foundations, move through structured levels, and transition into focused coaching for tournaments and championships. WPDA supports each stage with clarity and care.
+          <h2 className="text-4xl font-semibold">There is no pressure to know where to start</h2>
+          <p className="mt-4 max-w-3xl text-white/85">
+            Tell us a little about your child, their age and what they might enjoy. We will guide you toward a class that feels like a good fit, and if they later want to perform or compete, we can help with that too.
           </p>
           <Link href="/competitive" className="mt-7 inline-flex text-sm font-semibold text-gold hover:text-ivory">
-            Explore Competitive Training →
+            See How Dancers Can Grow →
           </Link>
         </div>
       </section>

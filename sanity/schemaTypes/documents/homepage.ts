@@ -46,7 +46,7 @@ export const homepage = defineType({
       title: "Styles section title",
       type: "string",
       group: "content",
-      initialValue: "Four disciplines. One academy standard."
+      initialValue: "Four styles, one friendly academy."
     }),
     defineField({
       name: "styles",

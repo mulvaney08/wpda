@@ -51,7 +51,7 @@ export function HomeTeamAccordion({ members }: HomeTeamAccordionProps) {
         ) : null}
         <div className="p-5">
           <p className="text-xs uppercase tracking-[0.18em] text-gold">{active.focus}</p>
-          <h3 className="mt-2 font-serif text-2xl">{active.name}</h3>
+          <h3 className="mt-2 text-2xl font-semibold">{active.name}</h3>
           <p className="mt-2 text-sm text-white/75">{active.role}</p>
           <p className="mt-3 text-sm text-white/85">{active.shortBio}</p>
         </div>

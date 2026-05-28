@@ -13,18 +13,18 @@ const config: Config = {
         serif: ["Cormorant Garamond", "serif"]
       },
       colors: {
-        base: "#0A0A0B",
-        panel: "#131317",
-        ivory: "#F4EFE6",
-        crimson: "#C1314B",
-        gold: "#B98A2D",
-        electric: "#2B83F6"
+        base: "#18130F",
+        panel: "#261D16",
+        ivory: "#FFF8EA",
+        crimson: "#D96A75",
+        gold: "#F0B94A",
+        electric: "#6FB9C9"
       },
       boxShadow: {
-        glow: "0 0 80px rgba(193, 49, 75, 0.28)"
+        glow: "0 0 90px rgba(240, 185, 74, 0.28)"
       },
       backgroundImage: {
-        mesh: "radial-gradient(circle at 20% 20%, rgba(185,138,45,0.2), transparent 38%), radial-gradient(circle at 80% 0%, rgba(43,131,246,0.2), transparent 45%), radial-gradient(circle at 80% 80%, rgba(193,49,75,0.2), transparent 38%)"
+        mesh: "radial-gradient(circle at 20% 20%, rgba(240,185,74,0.22), transparent 38%), radial-gradient(circle at 80% 0%, rgba(111,185,201,0.16), transparent 45%), radial-gradient(circle at 80% 80%, rgba(217,106,117,0.16), transparent 38%)"
       }
     }
   },

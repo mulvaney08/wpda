@@ -16,15 +16,16 @@
 
 body {
   @apply bg-base text-ivory antialiased;
-  background-image: radial-gradient(circle at 10% 10%, rgba(193, 49, 75, 0.14), transparent 30%),
-    radial-gradient(circle at 85% 30%, rgba(43, 131, 246, 0.14), transparent 35%),
-    linear-gradient(160deg, #09090b 0%, #111116 50%, #09090b 100%);
+  background-image: radial-gradient(circle at 12% 8%, rgba(240, 185, 74, 0.2), transparent 32%),
+    radial-gradient(circle at 88% 24%, rgba(111, 185, 201, 0.13), transparent 36%),
+    radial-gradient(circle at 50% 100%, rgba(217, 106, 117, 0.1), transparent 42%),
+    linear-gradient(160deg, #211810 0%, #18130f 48%, #241a12 100%);
   min-height: 100vh;
 }
 
 ::selection {
-  background: rgba(185, 138, 45, 0.45);
-  color: #fff;
+  background: rgba(240, 185, 74, 0.55);
+  color: #18130f;
 }
 
 a {
@@ -32,7 +33,7 @@ a {
 }
 
 .surface {
-  @apply rounded-3xl border border-white/10 bg-panel/85 backdrop-blur;
+  @apply rounded-3xl border border-gold/15 bg-panel/80 shadow-glow backdrop-blur;
 }
 
 .section-wrap {

@@ -14,8 +14,8 @@ export function PageHero({ eyebrow, title, intro, ctaLabel, ctaHref }: PageHeroP
       <div className="surface relative overflow-hidden p-8 sm:p-12">
         <div className="absolute inset-0 bg-mesh opacity-45" aria-hidden />
         <div className="relative max-w-3xl">
-          <p className="text-xs uppercase tracking-[0.25em] text-gold">{eyebrow}</p>
-          <h1 className="mt-4 font-serif text-4xl leading-tight sm:text-5xl">{title}</h1>
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-gold">{eyebrow}</p>
+          <h1 className="mt-4 text-4xl font-semibold leading-tight sm:text-5xl">{title}</h1>
           <p className="mt-6 text-lg text-white/80">{intro}</p>
           {ctaLabel && ctaHref ? (
             <Link

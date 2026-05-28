@@ -40,27 +40,6 @@ const socialIconLinks = [
   }
 ];
 
-const otherSocialLinks = [
-  {
-    platform: "Twitter",
-    url: "https://twitter.com/WPotaszkin/",
-    icon: (
-      <svg viewBox="0 0 24 24" aria-hidden className="h-5 w-5 fill-current">
-        <path d="M18.9 2H22l-6.77 7.74L23.2 22h-6.25l-4.9-6.82L6.08 22H3l7.24-8.28L.8 2h6.35l4.42 6.17L18.9 2Zm-1.1 18h1.73L6.2 3.9H4.34L17.8 20Z" />
-      </svg>
-    )
-  },
-  {
-    platform: "YouTube",
-    url: "https://www.youtube.com/channel/UCQEKtyPazgjqwHe8cIBZUAQ",
-    icon: (
-      <svg viewBox="0 0 24 24" aria-hidden className="h-5 w-5 fill-current">
-        <path d="M23.5 7.2a3 3 0 0 0-2.1-2.1C19.6 4.6 12 4.6 12 4.6s-7.6 0-9.4.5A3 3 0 0 0 .5 7.2 31.8 31.8 0 0 0 0 12a31.8 31.8 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.8.5 9.4.5 9.4.5s7.6 0 9.4-.5a3 3 0 0 0 2.1-2.1A31.8 31.8 0 0 0 24 12a31.8 31.8 0 0 0-.5-4.8ZM9.6 15.2V8.8L15.8 12l-6.2 3.2Z" />
-      </svg>
-    )
-  }
-];
-
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getContactPage();
 
@@ -68,7 +47,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title: page.seo?.title || "Contact",
     description:
       page.seo?.description ||
-      "Contact Wojtek Potaszkin Dance Academy in Dublin for class guidance, trial options, private lessons and competition pathway inquiries.",
+      "Contact Wojtek Potaszkin Dance Academy in Dublin and ask us about friendly class options, trial lessons and where to begin.",
     robots: page.seo?.noindex ? { index: false, follow: false } : undefined
   };
 }

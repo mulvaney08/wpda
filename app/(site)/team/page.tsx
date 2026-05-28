@@ -25,8 +25,8 @@ export default async function TeamPage() {
     <>
       <PageHero
         eyebrow="WPDA Team"
-        title="High-level coaches. Caring support network."
-        intro="Our team combines technical expertise, competition insight and family-focused support so dancers can thrive at every stage."
+        title="Friendly coaches and familiar faces."
+        intro="Our team brings experience, patience and family-focused support so every dancer has someone kind to guide them."
       />
 
       {featured ? (
@@ -44,7 +44,7 @@ export default async function TeamPage() {
               ) : null}
               <div className="p-7 sm:p-8 lg:col-span-3">
                 <p className="text-white/85">{featured.shortBio}</p>
-                <p className="mt-4 text-white/80">{featured.fullBio}</p>
+                <p className="mt-4 text-white/85">{featured.fullBio}</p>
               </div>
             </div>
           </article>
@@ -65,12 +65,12 @@ export default async function TeamPage() {
                 />
               ) : null}
               <div className="p-6">
-                <p className="text-xs uppercase tracking-[0.18em] text-gold">{member.focus}</p>
-                <h2 className="mt-2 font-serif text-2xl">{member.name}</h2>
+                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-gold">{member.focus}</p>
+                <h2 className="mt-2 text-2xl font-semibold">{member.name}</h2>
                 <p className="text-sm text-white/65">{member.role}</p>
-                <p className="mt-3 text-white/80">{member.shortBio}</p>
+                <p className="mt-3 text-white/85">{member.shortBio}</p>
                 {member.fullBio ? (
-                  <details className="mt-4 rounded-xl border border-white/10 bg-black/25 p-4 text-sm text-white/80">
+                  <details className="mt-4 rounded-xl border border-gold/15 bg-gold/10 p-4 text-sm text-white/85">
                     <summary className="cursor-pointer font-medium text-gold">Read more</summary>
                     <p className="mt-3">{member.fullBio}</p>
                   </details>

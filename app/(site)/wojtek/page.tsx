@@ -36,12 +36,12 @@ export default async function WojtekPage() {
             <SectionHeading
               eyebrow="Career Journey"
               title="From early dance in Poland to leading a Dublin academy"
-              intro="His trajectory reflects long-term commitment to high-level Ballroom and Latin performance, coaching and adjudication."
+              intro="Wojtek brings years of Ballroom and Latin experience into a studio culture that is encouraging, friendly and focused on helping dancers feel confident."
             />
             <div className="mt-6 space-y-3">
               {page.biographySections.map((item: string, index: number) => (
                 <article key={item} className="surface p-5">
-                  <p className="text-xs uppercase tracking-[0.2em] text-gold">Chapter {index + 1}</p>
+                  <p className="text-xs font-semibold uppercase tracking-[0.14em] text-gold">Chapter {index + 1}</p>
                   <p className="mt-2 text-white/85">{item}</p>
                 </article>
               ))}
@@ -51,7 +51,7 @@ export default async function WojtekPage() {
       </section>
 
       <section className="section-wrap pb-12">
-        <SectionHeading eyebrow="Founder Portfolio" title="Professional profile and adjudication moments" />
+        <SectionHeading eyebrow="Founder Gallery" title="Moments from Wojtek's dance journey" />
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {page.gallery.map((image) => {
             const imagePosition =
@@ -68,10 +68,10 @@ export default async function WojtekPage() {
 
       <section className="section-wrap py-14">
         <div className="surface p-8 sm:p-10">
-          <h2 className="font-serif text-4xl">The WPDA Standard</h2>
-          <p className="mt-4 max-w-3xl text-white/80">
+          <h2 className="text-4xl font-semibold">What Wojtek wants dancers to feel</h2>
+          <p className="mt-4 max-w-3xl text-white/85">
             {page.philosophy ||
-              "The academy culture is shaped by Wojtek’s core principles: dedicated work, positive attitude and genuine passion for dance. Those values guide beginner development, competitive preparation and every class experience across the studio."}
+              "The academy culture is shaped by encouragement, care and a genuine love of dance. Beginners are helped to feel comfortable, and growing dancers are supported with patience at every step."}
           </p>
         </div>
       </section>

@@ -20,7 +20,7 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     description:
       site.defaultSeo?.description ||
-      "Premium dance academy in Dublin for Ballroom, Latin, Breaking and Hip-Hop. Classes for children, teens and adults from beginner to competitive level.",
+      "Welcoming dance academy in Dublin for Ballroom, Latin, Breaking and Hip-Hop. Friendly classes for children, teens and adults.",
     robots: site.defaultSeo?.noindex ? { index: false, follow: false } : undefined,
     openGraph: {
       title: site.defaultSeo?.title || site.academyName,

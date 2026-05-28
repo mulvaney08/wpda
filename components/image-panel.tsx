@@ -12,7 +12,7 @@ type ImagePanelProps = {
 
 export function ImagePanel({ image, className, priority = false, imgClassName, imgStyle, imgFit = "cover" }: ImagePanelProps) {
   return (
-    <div className={`overflow-hidden rounded-2xl border border-white/10 bg-black/25 ${className ?? ""}`}>
+    <div className={`overflow-hidden rounded-2xl border border-gold/15 bg-gold/10 ${className ?? ""}`}>
       <Image
         src={image.src}
         alt={image.alt}

@@ -22,23 +22,23 @@ export function SiteHeaderClient({ navLinks, academyName, whatsapp }: SiteHeader
   }, [pathname]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-base/80 backdrop-blur-xl">
-      <div className="section-wrap flex items-center justify-between py-4">
-        <Link href="/" className="group inline-flex items-center gap-3">
+    <header className="sticky top-0 z-50 border-b border-gold/15 bg-base/85 backdrop-blur-xl">
+      <div className="section-wrap flex items-center justify-between gap-8 py-4">
+        <Link href="/" className="group inline-flex min-w-fit items-center gap-3 text-white">
           <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-gold/70 text-sm font-semibold text-gold">
             {monogram}
           </span>
-          <span className="font-serif text-lg tracking-wide">{academyName}</span>
+          <span className="text-base font-semibold tracking-wide text-white">{academyName}</span>
         </Link>
 
-        <nav className="hidden items-center gap-7 md:flex" aria-label="Main navigation">
+        <nav className="hidden flex-1 items-center justify-center gap-7 md:flex" aria-label="Main navigation">
           {navLinks.map((link) => {
             const active = pathname === link.href;
             return (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-sm tracking-wide transition hover:text-gold ${
+                className={`whitespace-nowrap text-sm tracking-wide transition hover:text-gold ${
                   active ? "text-gold" : "text-white/80"
                 }`}
               >
@@ -48,7 +48,7 @@ export function SiteHeaderClient({ navLinks, academyName, whatsapp }: SiteHeader
           })}
         </nav>
 
-        <div className="hidden md:block">
+        <div className="hidden min-w-fit md:block md:-translate-x-4">
           <Link
             href="/join"
             className="rounded-full border border-gold/60 px-5 py-2 text-sm font-medium text-gold hover:bg-gold hover:text-black"
@@ -58,14 +58,14 @@ export function SiteHeaderClient({ navLinks, academyName, whatsapp }: SiteHeader
         </div>
 
         <details ref={mobileMenuRef} className="group md:hidden">
-          <summary className="list-none rounded-full border border-white/15 px-4 py-2 text-sm">Menu</summary>
-          <nav className="absolute right-4 mt-3 w-56 rounded-2xl border border-white/15 bg-panel p-3 shadow-xl" aria-label="Mobile navigation">
+          <summary className="list-none rounded-full border border-gold/25 bg-gold/10 px-4 py-2 text-sm">Menu</summary>
+          <nav className="absolute right-4 mt-3 w-56 rounded-2xl border border-gold/20 bg-panel p-3 shadow-xl" aria-label="Mobile navigation">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => mobileMenuRef.current?.removeAttribute("open")}
-                className="block rounded-lg px-3 py-2 text-sm text-white/85 hover:bg-white/10"
+                className="block rounded-lg px-3 py-2 text-sm text-white/85 hover:bg-gold/10"
               >
                 {link.label}
               </Link>

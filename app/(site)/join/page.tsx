@@ -9,10 +9,10 @@ export async function generateMetadata(): Promise<Metadata> {
   const seo = join.seo || fallbackSeo;
 
   return {
-    title: seo?.title || "Timetable & Join Us",
+    title: seo?.title || "Join WPDA",
     description:
       seo?.description ||
-      "Join WPDA in Dublin with a clear path by age and level. Ask for timetable guidance and class availability.",
+      "Ask WPDA about class times, friendly starting points and the best dance class for your child or family.",
     robots: seo?.noindex ? { index: false, follow: false } : undefined
   };
 }
@@ -35,8 +35,8 @@ export default async function JoinPage() {
           <div className="lg:col-span-3 grid gap-5 md:grid-cols-2">
             {content.pathways.map((path: { title: string; text: string }) => (
               <article key={path.title} className="surface p-6">
-                <h2 className="font-serif text-2xl">{path.title}</h2>
-                <p className="mt-3 text-white/80">{path.text}</p>
+                <h2 className="text-2xl font-semibold">{path.title}</h2>
+                <p className="mt-3 text-white/85">{path.text}</p>
               </article>
             ))}
           </div>
@@ -44,8 +44,8 @@ export default async function JoinPage() {
         </div>
 
         <div className="surface mt-8 p-8 text-center">
-          <h2 className="font-serif text-3xl">{content.howToStartTitle}</h2>
-          <p className="mx-auto mt-4 max-w-2xl text-white/80">{content.howToStartText}</p>
+          <h2 className="text-3xl font-semibold">{content.howToStartTitle}</h2>
+          <p className="mx-auto mt-4 max-w-2xl text-white/85">{content.howToStartText}</p>
           <div className="mt-7 flex flex-wrap items-center justify-center gap-4">
             <Link href={content.primaryCtaHref} className="rounded-full bg-gold px-6 py-3 text-sm font-semibold text-black hover:bg-ivory">
               {content.primaryCtaLabel}
