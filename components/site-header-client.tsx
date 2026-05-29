@@ -23,12 +23,12 @@ export function SiteHeaderClient({ navLinks, academyName, whatsapp }: SiteHeader
 
   return (
     <header className="sticky top-0 z-50 border-b border-gold/15 bg-base/85 backdrop-blur-xl">
-      <div className="section-wrap flex items-center justify-between gap-8 py-4">
-        <Link href="/" className="group inline-flex min-w-fit items-center gap-3 text-white">
-          <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-gold/70 text-sm font-semibold text-gold">
+      <div className="section-wrap flex items-center justify-between gap-3 py-4 md:gap-8">
+        <Link href="/" className="group inline-flex min-w-0 items-center gap-2 text-white md:min-w-fit md:gap-3">
+          <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-gold/70 text-xs font-semibold text-gold md:h-9 md:w-9 md:text-sm">
             {monogram}
           </span>
-          <span className="text-base font-semibold tracking-wide text-white">{academyName}</span>
+          <span className="truncate text-xs font-semibold tracking-wide !text-white sm:text-sm md:text-base">{academyName}</span>
         </Link>
 
         <nav className="hidden flex-1 items-center justify-center gap-7 md:flex" aria-label="Main navigation">
@@ -57,9 +57,9 @@ export function SiteHeaderClient({ navLinks, academyName, whatsapp }: SiteHeader
           </Link>
         </div>
 
-        <details ref={mobileMenuRef} className="group md:hidden">
+        <details ref={mobileMenuRef} className="group relative shrink-0 md:hidden">
           <summary className="list-none rounded-full border border-gold/25 bg-gold/10 px-4 py-2 text-sm">Menu</summary>
-          <nav className="absolute right-4 mt-3 w-56 rounded-2xl border border-gold/20 bg-panel p-3 shadow-xl" aria-label="Mobile navigation">
+          <nav className="absolute right-0 mt-3 w-56 rounded-2xl border border-gold/20 bg-panel p-3 shadow-xl" aria-label="Mobile navigation">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
