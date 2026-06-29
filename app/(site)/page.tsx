@@ -6,6 +6,7 @@ import { ImagePanel } from "@/components/image-panel";
 import { HomeTeamAccordion } from "@/components/home-team-accordion";
 import { TrackedLink } from "@/components/tracked-link";
 import { SecondaryLink } from "@/components/secondary-link";
+import { TrackedAnchor } from "@/components/tracked-anchor";
 import { classesImages, homepageImages } from "@/data/images";
 import { getHomepageContent, getNewsArticles, getSiteShell } from "@/sanity/lib/loaders";
 
@@ -225,15 +226,15 @@ export default async function HomePage() {
                   </p>
                   <h3 className="mt-2 text-2xl font-semibold leading-tight">{article.title}</h3>
                   <p className="mt-3 text-sm text-white/80">{truncateExcerpt(article.excerpt, 120)}</p>
-                  <Link href={`/news-success/${article.slug}`} onClick={() => {
-                    const { trackEvent } = require("@/lib/analytics");
-                    trackEvent("article_link_click", {
-                      article_title: article.title,
-                      location: "news_section"
-                    });
-                  }} className="mt-4 inline-flex text-sm font-semibold text-gold hover:text-ivory">
+                  <TrackedAnchor
+                    href={`/news-success/${article.slug}`}
+                    eventLabel={article.title}
+                    eventLocation="news_section"
+                    eventType="article_link_click"
+                    className="mt-4 inline-flex text-sm font-semibold text-gold hover:text-ivory"
+                  >
                     Read The Story →
-                  </Link>
+                  </TrackedAnchor>
                 </div>
               </article>
             ))}
@@ -272,43 +273,34 @@ export default async function HomePage() {
             >
               {content.finalPrimaryCta.label}
             </TrackedLink>
-            <a
+            <TrackedAnchor
               href={content.finalSecondaryCta.href}
-              onClick={() => {
-                const { trackEvent } = require("@/lib/analytics");
-                trackEvent("cta_click", {
-                  cta_label: content.finalSecondaryCta.label,
-                  location: "final_cta_section",
-                  destination: content.finalSecondaryCta.href
-                });
-              }}
+              eventLabel={content.finalSecondaryCta.label}
+              eventLocation="final_cta_section"
+              eventType="cta_click"
               className="rounded-full border border-gold/40 bg-gold/10 px-6 py-3 text-sm font-semibold hover:border-gold hover:text-gold"
             >
               {content.finalSecondaryCta.label}
-            </a>
+            </TrackedAnchor>
           </div>
           <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
             {site.socialLinks
               .filter((item: { platform: string }) => Boolean(getSocialIcon(item.platform)))
               .map((item: { platform: string; url: string }) => (
-                <a
+                <TrackedAnchor
                   key={item.platform}
                   href={item.url}
                   target="_blank"
                   rel="noreferrer"
                   aria-label={item.platform}
                   title={item.platform}
-                  onClick={() => {
-                    const { trackEvent } = require("@/lib/analytics");
-                    trackEvent("social_click", {
-                      platform: item.platform,
-                      location: "final_cta_section"
-                    });
-                  }}
+                  eventLabel={item.platform}
+                  eventLocation="final_cta_section"
+                  eventType="social_click"
                   className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-gold/25 bg-gold/10 text-white/85 hover:border-gold hover:text-gold"
                 >
                   {getSocialIcon(item.platform)}
-                </a>
+                </TrackedAnchor>
               ))}
           </div>
         </div>
