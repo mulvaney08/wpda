@@ -34,9 +34,9 @@ export const academyImageByStyle = {
 
 export const homepageImages = {
   hero: {
-    src: "/images/wpda1.webp",
-    alt: "Group ballroom and latin class in WPDA studio",
-    width: 1440,
+    src: "/images/kids_circle.jpg",
+    alt: "Class at WPDA",
+    width: 1080,
     height: 1080
   },
   kids: {
@@ -46,16 +46,16 @@ export const homepageImages = {
     height: 2048
   },
   beginners: {
-    src: "/images/wpda5.webp",
-    alt: "Adults learning partner dance in a beginner class",
+    src: "/images/park.jpg",
+    alt: "Showcase dance",
     width: 1080,
     height: 810
   },
   warmup: {
-    src: "/images/wpda4.webp",
-    alt: "Students in a conditioning and warm-up session",
-    width: 1310,
-    height: 778
+    src: "/images/mad_dak.jpg",
+    alt: "Kids in class",
+    width: 1080,
+    height: 1080
   },
   competitionKids: {
     src: "/images/wpda7.png",
@@ -91,8 +91,8 @@ export const classesImages = {
     height: 810
   },
   specialist: {
-    src: "/images/wpda4.webp",
-    alt: "Cross-training and fitness work supporting dancers",
+    src: "/images/blurred.jpg",
+    alt: "Blurred background dancer",
     width: 1310,
     height: 778
   }

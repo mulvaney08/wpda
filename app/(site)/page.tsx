@@ -87,7 +87,7 @@ export default async function HomePage() {
             </div>
           </div>
           <div className="col-span-12 md:col-span-6 md:pt-6">
-            <ImagePanel image={content.heroImage} priority className="aspect-[127/100] md:aspect-[122/100] shadow-glow" imgClassName="object-[50%_58%]" />
+            <ImagePanel image={content.heroImage} priority className="aspect-[100/100] md:aspect-[100/100] shadow-glow" imgClassName="object-[50%_58%]" />
           </div>
         </div>
       </section>
@@ -97,7 +97,7 @@ export default async function HomePage() {
         <div className="mt-8 grid gap-4 md:grid-cols-12">
           <ImagePanel image={introImages[0]} className="aspect-[4/3] md:col-span-4" imgClassName="object-[50%_35%]" />
           <ImagePanel image={introImages[1]} className="aspect-[4/3] md:col-span-4" imgClassName="object-[50%_42%]" />
-          <ImagePanel image={introImages[2]} className="aspect-[4/3] md:col-span-4" imgClassName="object-[50%_46%]" />
+          <ImagePanel image={introImages[2]} className="aspect-[4/3] md:col-span-4" imgClassName="object-[50%_30%]" />
         </div>
       </section>
 
