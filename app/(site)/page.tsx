@@ -4,6 +4,8 @@ import Image from "next/image";
 import { SectionHeading } from "@/components/section-heading";
 import { ImagePanel } from "@/components/image-panel";
 import { HomeTeamAccordion } from "@/components/home-team-accordion";
+import { TrackedLink } from "@/components/tracked-link";
+import { SecondaryLink } from "@/components/secondary-link";
 import { classesImages, homepageImages } from "@/data/images";
 import { getHomepageContent, getNewsArticles, getSiteShell } from "@/sanity/lib/loaders";
 
@@ -71,19 +73,29 @@ export default async function HomePage() {
 
   return (
     <>
-      <section className="section-wrap pb-12 pt-14 sm:pb-16 sm:pt-20">
-        <div className="editorial-grid items-center gap-y-10">
+      <section className="section-wrap pb-6 pt-10 sm:pb-12 sm:pt-16 lg:pb-16 lg:pt-20">
+        <div className="editorial-grid items-center gap-y-6 sm:gap-y-10">
           <div className="col-span-12 md:col-span-6">
             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-gold">{content.heroEyebrow}</p>
             <h1 className="mt-5 text-3xl font-semibold leading-[1.08] sm:text-4xl lg:text-5xl">{content.heroHeadline}</h1>
             <p className="mt-6 max-w-xl text-lg text-white/85">{content.heroSubheadline}</p>
             <div className="mt-8 flex flex-wrap gap-4">
-              <Link href={content.heroPrimaryCta.href} className="rounded-full bg-gold px-6 py-3 text-sm font-semibold text-black hover:bg-ivory">
+              <TrackedLink
+                href={content.heroPrimaryCta.href}
+                label={content.heroPrimaryCta.label}
+                location="hero_section"
+                className="rounded-full bg-gold px-6 py-3 text-sm font-semibold text-black hover:bg-ivory"
+              >
                 {content.heroPrimaryCta.label}
-              </Link>
-              <Link href={content.heroSecondaryCta.href} className="rounded-full border border-gold/40 bg-gold/10 px-6 py-3 text-sm font-semibold hover:border-gold hover:text-gold">
+              </TrackedLink>
+              <TrackedLink
+                href={content.heroSecondaryCta.href}
+                label={content.heroSecondaryCta.label}
+                location="hero_section"
+                className="rounded-full border border-gold/40 bg-gold/10 px-6 py-3 text-sm font-semibold hover:border-gold hover:text-gold"
+              >
                 {content.heroSecondaryCta.label}
-              </Link>
+              </TrackedLink>
             </div>
           </div>
           <div className="col-span-12 md:col-span-6 md:pt-6">
@@ -92,18 +104,18 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="section-wrap py-12">
+      <section className="section-wrap py-8 sm:py-12">
         <SectionHeading eyebrow={content.introEyebrow} title={content.introTitle} intro={content.introText} />
-        <div className="mt-8 grid gap-4 md:grid-cols-12">
+        <div className="mt-6 sm:mt-8 grid gap-3 sm:gap-4 md:grid-cols-12">
           <ImagePanel image={introImages[0]} className="aspect-[4/3] md:col-span-4" imgClassName="object-[50%_35%]" />
           <ImagePanel image={introImages[1]} className="aspect-[4/3] md:col-span-4" imgClassName="object-[50%_42%]" />
           <ImagePanel image={introImages[2]} className="aspect-[4/3] md:col-span-4" imgClassName="object-[50%_30%]" />
         </div>
       </section>
 
-      <section className="section-wrap pb-12">
+      <section className="section-wrap pb-8 sm:pb-12">
         <SectionHeading eyebrow="Find Your Style" title={content.styleTitle} />
-        <div className="mt-8 grid gap-5 md:grid-cols-2">
+        <div className="mt-6 sm:mt-8 grid gap-4 sm:gap-5 md:grid-cols-2">
           {content.styles.map((style) => {
             const imageClass =
               style.title === "Ballroom"
@@ -128,9 +140,9 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="section-wrap py-12">
+      <section className="section-wrap py-8 sm:py-12">
         <SectionHeading eyebrow="For Every Age" title="A class your child can feel happy walking into" />
-        <div className="mt-8 grid gap-5 lg:grid-cols-3">
+        <div className="mt-6 sm:mt-8 grid gap-4 sm:gap-5 lg:grid-cols-3">
           {content.categories.slice(0, 3).map((group: { title: string; classes: { name: string }[] }) => (
             <article key={group.title} className="surface p-6">
               <h3 className="text-2xl font-semibold">{group.title}</h3>
@@ -144,14 +156,14 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="section-wrap py-12">
-        <div className="surface p-8 sm:p-10">
+      <section className="section-wrap py-8 sm:py-12">
+        <div className="surface p-6 sm:p-8 sm:p-10">
           <SectionHeading
             eyebrow="When They Are Ready"
             title="For dancers who want to go further"
             intro="If your child is ready for competitions, we guide them one step at a time with calm coaching, clear goals and plenty of encouragement along the way."
           />
-          <div className="mt-6 grid gap-4 md:grid-cols-2">
+          <div className="mt-6 grid gap-3 sm:gap-4 md:grid-cols-2">
             {content.competitiveHighlights.map((item: string) => (
               <p key={item} className="rounded-2xl border border-gold/15 bg-gold/10 p-4 text-sm text-white/85">
                 {item}
@@ -164,9 +176,9 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="section-wrap py-12">
+      <section className="section-wrap py-8 sm:py-12">
         <SectionHeading eyebrow="Why WPDA" title="Why parents feel comfortable choosing WPDA" />
-        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-6 sm:mt-8 grid gap-4 sm:gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {content.valuePillars.map((pillar: { title: string; text: string }) => (
             <article key={pillar.title} className="surface p-5">
               <h3 className="font-semibold">{pillar.title}</h3>
@@ -176,30 +188,28 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="section-wrap py-12">
+      <section className="section-wrap py-8 sm:py-12">
         <SectionHeading eyebrow="Team" title={content.teamSectionTitle} />
-        <div className="mt-8">
+        <div className="mt-6 sm:mt-8">
           <HomeTeamAccordion members={content.teamPreview} />
         </div>
         <div className="mt-6">
-          <Link href="/team" className="text-sm font-semibold text-gold hover:text-ivory">
-            Meet The Full Team →
-          </Link>
+          <SecondaryLink href="/team" label="Meet The Full Team →" eventLabel="Meet The Full Team" location="team_section" />
         </div>
       </section>
 
-      <section className="section-wrap py-12">
+      <section className="section-wrap py-8 sm:py-12">
         <SectionHeading
           eyebrow="Academy Life"
           title="Smiles, milestones and proud moments"
           intro="See what our dancers have been up to, from class progress and academy events to competition days worth celebrating."
         />
         {recentNews.length ? (
-          <div className="mt-8 grid gap-5 md:grid-cols-3">
+          <div className="mt-6 sm:mt-8 grid gap-4 sm:gap-5 md:grid-cols-3">
             {recentNews.map((article) => (
               <article key={article.id} className="surface overflow-hidden">
                 {article.coverImage ? (
-                  <div className="relative aspect-[3/4] overflow-hidden">
+                  <div className="relative aspect-[3/2] sm:aspect-[3/4] md:aspect-[3/2] lg:aspect-[3/4] overflow-hidden">
                     <Image
                       src={article.coverImage.src}
                       alt={article.coverImage.alt}
@@ -215,7 +225,13 @@ export default async function HomePage() {
                   </p>
                   <h3 className="mt-2 text-2xl font-semibold leading-tight">{article.title}</h3>
                   <p className="mt-3 text-sm text-white/80">{truncateExcerpt(article.excerpt, 120)}</p>
-                  <Link href={`/news-success/${article.slug}`} className="mt-4 inline-flex text-sm font-semibold text-gold hover:text-ivory">
+                  <Link href={`/news-success/${article.slug}`} onClick={() => {
+                    const { trackEvent } = require("@/lib/analytics");
+                    trackEvent("article_link_click", {
+                      article_title: article.title,
+                      location: "news_section"
+                    });
+                  }} className="mt-4 inline-flex text-sm font-semibold text-gold hover:text-ivory">
                     Read The Story →
                   </Link>
                 </div>
@@ -226,36 +242,48 @@ export default async function HomePage() {
           <div className="surface mt-8 p-6 text-white/85">New stories will appear here soon.</div>
         )}
         <div className="mt-6">
-          <Link href="/news-success" className="text-sm font-semibold text-gold hover:text-ivory">
-            View All News & Success →
-          </Link>
+          <SecondaryLink href="/news-success" label="View All News & Success →" eventLabel="View All News & Success" location="news_section" />
         </div>
       </section>
 
-      <section className="section-wrap py-12">
+      <section className="section-wrap py-8 sm:py-12">
         <SectionHeading eyebrow="Gallery" title="See the energy inside the academy" />
-        <div className="mt-8 grid gap-4 sm:grid-cols-3">
-          <ImagePanel image={galleryPreview[0]} className="aspect-square" imgClassName="object-[50%_44%]" />
-          <ImagePanel image={galleryPreview[1]} className="aspect-square" imgStyle={{ objectPosition: "-30px" }} />
-          <ImagePanel image={galleryPreview[2]} className="aspect-square" />
+        <div className="mt-6 sm:mt-8 grid gap-3 sm:gap-4 sm:grid-cols-3">
+          <ImagePanel image={galleryPreview[0]} className="aspect-[4/3] sm:aspect-square" imgClassName="object-[50%_44%]" />
+          <ImagePanel image={galleryPreview[1]} className="aspect-[4/3] sm:aspect-square" imgStyle={{ objectPosition: "-30px" }} />
+          <ImagePanel image={galleryPreview[2]} className="aspect-[4/3] sm:aspect-square" />
         </div>
         <div className="mt-6">
-          <Link href="/gallery" className="text-sm font-semibold text-gold hover:text-ivory">
-            View Full Gallery →
-          </Link>
+          <SecondaryLink href="/gallery" label="View Full Gallery →" eventLabel="View Full Gallery" location="gallery_section" />
         </div>
       </section>
 
-      <section className="section-wrap py-16">
-        <div className="surface bg-gradient-to-r from-gold/20 via-panel/70 to-electric/15 p-8 text-center sm:p-12">
+      <section className="section-wrap py-12 sm:py-16">
+        <div className="surface bg-gradient-to-r from-gold/20 via-panel/70 to-electric/15 p-6 sm:p-8 md:p-12 text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.14em] text-gold">{content.finalCtaEyebrow}</p>
           <h2 className="mt-4 text-4xl font-semibold">{content.finalCtaTitle.replace("WPDA", site.shortName)}</h2>
           <p className="mx-auto mt-4 max-w-2xl text-white/85">{content.finalCtaText}</p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-            <Link href={content.finalPrimaryCta.href} className="rounded-full bg-gold px-6 py-3 text-sm font-semibold text-black hover:bg-ivory">
+            <TrackedLink
+              href={content.finalPrimaryCta.href}
+              label={content.finalPrimaryCta.label}
+              location="final_cta_section"
+              className="rounded-full bg-gold px-6 py-3 text-sm font-semibold text-black hover:bg-ivory"
+            >
               {content.finalPrimaryCta.label}
-            </Link>
-            <a href={content.finalSecondaryCta.href} className="rounded-full border border-gold/40 bg-gold/10 px-6 py-3 text-sm font-semibold hover:border-gold hover:text-gold">
+            </TrackedLink>
+            <a
+              href={content.finalSecondaryCta.href}
+              onClick={() => {
+                const { trackEvent } = require("@/lib/analytics");
+                trackEvent("cta_click", {
+                  cta_label: content.finalSecondaryCta.label,
+                  location: "final_cta_section",
+                  destination: content.finalSecondaryCta.href
+                });
+              }}
+              className="rounded-full border border-gold/40 bg-gold/10 px-6 py-3 text-sm font-semibold hover:border-gold hover:text-gold"
+            >
               {content.finalSecondaryCta.label}
             </a>
           </div>
@@ -270,6 +298,13 @@ export default async function HomePage() {
                   rel="noreferrer"
                   aria-label={item.platform}
                   title={item.platform}
+                  onClick={() => {
+                    const { trackEvent } = require("@/lib/analytics");
+                    trackEvent("social_click", {
+                      platform: item.platform,
+                      location: "final_cta_section"
+                    });
+                  }}
                   className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-gold/25 bg-gold/10 text-white/85 hover:border-gold hover:text-gold"
                 >
                   {getSocialIcon(item.platform)}
