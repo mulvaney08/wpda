@@ -59,7 +59,7 @@ export const classCategories = [
     classes: [
       {
         name: "Baby Ballroom",
-        audience: "Young children starting dance",
+        audience: "Young children starting dance (ages 2-5)",
         description:
           "A playful first step into dance through rhythm, movement games and ballroom-based coordination in a caring environment.",
         partnerRequired: "No"

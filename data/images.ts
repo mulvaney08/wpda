@@ -200,7 +200,7 @@ export const curatedGallery: { title: string; images: ImageAsset[] }[] = [
     title: "Latin",
     images: [
       { src: "/images/wpda12.jpg", alt: "Latin solo costume performance", width: 1365, height: 2048 },
-      { src: "/images/wpda11.jpeg", alt: "Latin costume portrait before event", width: 1200, height: 1600 }
+      { src: "/images/J&M.jpg", alt: "Latin costume portrait before event", width: 1200, height: 1600 }
     ]
   },
   {
