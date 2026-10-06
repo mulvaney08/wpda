@@ -67,7 +67,7 @@ export const classCategoriesQuery = groq`*[_type == "classCategory"]|order(displ
   featuredImage{${imageFields}}
 }`;
 
-export const teamMembersQuery = groq`*[_type == "teamMember"]|order(order asc){
+export const teamMembersQuery = groq`*[_type == "teamMember" && !(name in ["LesleyAnn Jones", "Elaine O'Dwyer", "Zhenya Kovalenko"])]|order(order asc){
   _id,
   name,
   role,

@@ -171,18 +171,18 @@ export const teamMembers = [
     extra: "Beyond classes, Sinead supports team choreography, shows, showcases and community events. Her energy and love for dance help younger dancers feel excited about learning."
   },
   {
+    name: "Cathy Caulfield",
+    role: "Studio Manager",
+    focus: "Operations",
+    bio: "Cathy has over 15 years' experience in the dance industry as both dance parent and as manager of our studio. Having previously worked in childcare industry, Cathy has almost 10 years experience in the financial services industry and is QFA Financial Advisor qualified.",
+    extra: "Cathy is often the first person new students and parents meet. She is always happy to help with class choices, payments, lessons, shoes, dresses and the many little questions that come with joining a dance academy."
+  },
+  {
     name: "Volodymyr Belei",
     role: "Ballroom Coach",
     focus: "Ballroom",
     bio: "Volodymyr is a WDSF licensed adjudicator, choreographer and dance educator with over 30 years of teaching experience, working with both children and adults. After graduating from college and university with a degree in choreography, he dedicated his life to the dance world.",
     extra: "His career includes helping beginners find their footing as well as supporting dancers who want to grow further. He brings patience, experience and a deep love of dance to Ireland."
-  },
-  {
-    name: "Zhenya Kovalenko",
-    role: "Hiphop & Breaking Teacher",
-    focus: "Hip-Hop & Breaking",
-    bio: "Recent addition to the team, Zhenya brings 26 years of dance experience to the studio and has a range of dance skills including HipHop, Breaking, Jazz Funk, Jazz modern, Acro, Waacking and classic dance.",
-    extra: "We're looking forward to the new 2025 season to see what exciting new attributes he will bring to the school."
   },
   {
     name: "Elena Konopljova",
@@ -192,18 +192,11 @@ export const teamMembers = [
     extra: "She will provide coaching for our dancers to help with strength, stamina, flexibility and cardio fitness."
   },
   {
-    name: "Cathy Caulfield",
-    role: "Studio Manager",
-    focus: "Operations",
-    bio: "Cathy has over 15 years' experience in the dance industry as both dance parent and as manager of our studio. Having previously worked in childcare industry, Cathy has almost 10 years experience in the financial services industry and is QFA Financial Advisor qualified.",
-    extra: "Cathy is often the first person new students and parents meet. She is always happy to help with class choices, payments, lessons, shoes, dresses and the many little questions that come with joining a dance academy."
-  },
-  {
-    name: "LesleyAnn Jones",
-    role: "Child Liaison Officer",
-    focus: "Student Wellbeing",
-    bio: "LesleyAnn is our designated Child Liaison Person with over 15 years' experience working in childcare. She helps keep our team up to date with Garda Vetting, child protection training and First Aid.",
-    extra: "LesleyAnn is available for questions, concerns or suggestions from parents, and helps make the studio a safe, welcoming space for children and adults to train and enjoy."
+    name: "Alisha Vishenka",
+    role: "Hip-Hop & Street Dance Instructor",
+    focus: "Hip-Hop & Street Dance",
+    bio: "Originally from Ukraine, Alisha brings an energetic, expressive approach to street dance. Her styles include Hip-Hop, House, Dancehall, Popping and Locking, with an emphasis on rhythm, musicality and individual expression.",
+    extra: "From the groove of House and Dancehall to the sharp hits of Popping and Locking, Alisha explores the different rhythms and character of each style."
   }
 ];
 

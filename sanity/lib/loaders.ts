@@ -38,6 +38,8 @@ import {
 } from "@/sanity/lib/queries";
 import type { DisplayImage, HomeStyleCard, NavLink, NewsArticle, NewsArticleSummary, SeoFields, SiteShell, TeamMemberCard } from "@/src/types/sanity";
 
+const hiddenTeamMemberNames = new Set(["LesleyAnn Jones", "Elaine O'Dwyer", "Zhenya Kovalenko"]);
+
 type SanityClassCategory = {
   title: string;
   audienceType?: string;
@@ -442,7 +444,8 @@ export const getNewsArticles = cache(async (): Promise<NewsArticleSummary[]> => 
       eventDate: item.eventDate,
       location: item.location,
       featured: item.featured,
-      coverImage: toDisplayImage(item.coverImage, item.title)
+      coverImage: toDisplayImage(item.coverImage, item.title),
+      coverImagePosition: item.slug?.toLowerCase().includes("dancecomp") ? "top" : undefined
     }));
 });
 
@@ -496,7 +499,7 @@ export const getTestimonials = cache(async () => {
 
 function normalizeTeam(data: SanityTeamMember[] | null | undefined): TeamMemberCard[] {
   if (!data?.length) {
-    return fallbackTeamMembers.map((member) => ({
+    return placeTeamMemberThird(fallbackTeamMembers.filter((member) => !hiddenTeamMemberNames.has(member.name)).map((member) => ({
       ...getTeamImagePresentation(member.name, Boolean(teamHeadshots[member.name])),
       name: member.name,
       role: member.role,
@@ -505,10 +508,10 @@ function normalizeTeam(data: SanityTeamMember[] | null | undefined): TeamMemberC
       fullBio: member.extra,
       featured: member.featured,
       image: teamHeadshots[member.name] || contactImage
-    }));
+    })));
   }
 
-  return data.map((member) => ({
+  return placeTeamMemberThird(data.filter((member) => !hiddenTeamMemberNames.has(member.name)).map((member) => ({
     ...getTeamImagePresentation(member.name, Boolean(member.profileImage)),
     name: member.name,
     role: member.role,
@@ -516,11 +519,28 @@ function normalizeTeam(data: SanityTeamMember[] | null | undefined): TeamMemberC
     shortBio: member.shortBio,
     fullBio: member.fullBio,
     featured: member.featured,
-    image: toDisplayImage(member.profileImage, member.name) || contactImage
-  }));
+    image: toDisplayImage(member.profileImage, member.name) || teamHeadshots[member.name] || contactImage
+  })));
+}
+
+function placeTeamMemberThird(members: TeamMemberCard[]): TeamMemberCard[] {
+  const cathyIndex = members.findIndex((member) => member.name === "Cathy Caulfield");
+
+  if (cathyIndex < 0 || cathyIndex === 2) {
+    return members;
+  }
+
+  const orderedMembers = [...members];
+  const [cathy] = orderedMembers.splice(cathyIndex, 1);
+  orderedMembers.splice(Math.min(2, orderedMembers.length), 0, cathy);
+  return orderedMembers;
 }
 
 function getTeamImagePresentation(name: string, hasProfileImage: boolean): Pick<TeamMemberCard, "imageFit" | "imagePosition"> {
+  if (name === "Alisha Vishenka") {
+    return { imageFit: "cover", imagePosition: "50% 0%" };
+  }
+
   if (!hasProfileImage) {
     return { imageFit: "contain", imagePosition: "50% 50%" };
   }

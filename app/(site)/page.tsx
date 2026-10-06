@@ -217,6 +217,7 @@ export default async function HomePage() {
                       fill
                       sizes="(min-width: 1024px) 30vw, (min-width: 768px) 45vw, 100vw"
                       className="h-full w-full object-cover"
+                      style={{ objectPosition: article.coverImagePosition ?? "center" }}
                     />
                   </div>
                 ) : null}

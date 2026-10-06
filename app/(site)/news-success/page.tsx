@@ -61,6 +61,7 @@ export default async function NewsSuccessPage() {
                       fill
                       sizes="(min-width: 768px) 300px, 100vw"
                       className="h-full w-full object-cover"
+                      style={{ objectPosition: article.coverImagePosition ?? "center" }}
                     />
                   </div>
                 ) : null}

@@ -172,12 +172,6 @@ export const teamHeadshots: Record<string, ImageAsset | null> = {
     width: 400,
     height: 600
   },
-  "Zhenya Kovalenko": {
-    src: "/images/zhenya.jpg",
-    alt: "Breaking performance connected to Zhenya Kovalenko",
-    width: 538,
-    height: 807
-  },
   "Elena Konopljova": {
     src: "/images/elena.jpg",
     alt: "Elena Konopljova portrait",
@@ -185,7 +179,12 @@ export const teamHeadshots: Record<string, ImageAsset | null> = {
     height: 600
   },
   "Cathy Caulfield": null,
-  "LesleyAnn Jones": null
+  "Alisha Vishenka": {
+    src: "/images/alisha-vishenka.png",
+    alt: "Alisha Vishenka performing street dance",
+    width: 768,
+    height: 936
+  }
 };
 
 export const curatedGallery: { title: string; images: ImageAsset[] }[] = [
@@ -206,7 +205,7 @@ export const curatedGallery: { title: string; images: ImageAsset[] }[] = [
   {
     title: "Breaking / Hip-Hop",
     images: [
-      { src: "/images/zhenya.jpg", alt: "Breaking stage freeze", width: 538, height: 807 },
+      { src: "/images/breakdance.jpg", alt: "Breakdance crew in a dynamic street-style freeze", width: 612, height: 408 },
       { src: "/images/wpda6.jpeg", alt: "Kids breaking and hip-hop class", width: 1179, height: 714 }
     ]
   },
