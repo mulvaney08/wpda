@@ -433,19 +433,24 @@ export const getNewsArticles = cache(async (): Promise<NewsArticleSummary[]> => 
 
   return (data as SanityNewsArticle[])
     .filter((item) => Boolean(item.slug))
-    .map((item) => ({
-      id: item._id,
-      title: item.title,
-      slug: item.slug || "",
-      category: item.category || "news",
-      excerpt: item.excerpt,
-      publishedAt: item.publishedAt || new Date().toISOString(),
-      eventDate: item.eventDate,
-      location: item.location,
-      featured: item.featured,
-      coverImage: toDisplayImage(item.coverImage, item.title),
-      coverImagePosition: item.slug?.toLowerCase().includes("dancecomp") ? "top" : undefined
-    }));
+    .map((item) => {
+      const isEventPoster = ["dancecomp", "training-day"].some((term) => item.slug?.toLowerCase().includes(term));
+
+      return {
+        id: item._id,
+        title: item.title,
+        slug: item.slug || "",
+        category: item.category || "news",
+        excerpt: item.excerpt,
+        publishedAt: item.publishedAt || new Date().toISOString(),
+        eventDate: item.eventDate,
+        location: item.location,
+        featured: item.featured,
+        coverImage: toDisplayImage(item.coverImage, item.title),
+        coverImageFit: isEventPoster ? "contain" : undefined,
+        coverImagePosition: isEventPoster ? "top" : undefined
+      };
+    });
 });
 
 export const getNewsArticleBySlug = cache(async (slug: string): Promise<NewsArticle | null> => {

@@ -22,7 +22,7 @@ export function SiteHeaderClient({ navLinks, academyName, whatsapp }: SiteHeader
   }, [pathname]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-gold/15 bg-base/85 backdrop-blur-xl">
+    <header className="relative z-50 border-b border-gold/15 bg-base/85 backdrop-blur-xl xl:sticky xl:top-0">
       <div className="section-wrap flex items-center justify-between gap-3 py-4 md:gap-8">
         <Link href="/" className="group inline-flex min-w-0 items-center gap-2 text-white md:min-w-fit md:gap-3">
           <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-gold/70 text-xs font-semibold text-gold md:h-9 md:w-9 md:text-sm">

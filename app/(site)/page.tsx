@@ -226,14 +226,23 @@ export default async function HomePage() {
             {recentNews.map((article) => (
               <article key={article.id} className="surface overflow-hidden">
                 {article.coverImage ? (
-                  <div className="relative aspect-[3/2] sm:aspect-[3/4] md:aspect-[3/2] lg:aspect-[3/4] overflow-hidden">
+                  <div
+                    className={`relative overflow-hidden ${
+                      article.coverImageFit === "contain"
+                        ? "aspect-[4/5] bg-panel"
+                        : "aspect-[3/2] sm:aspect-[3/4] md:aspect-[3/2] lg:aspect-[3/4]"
+                    }`}
+                  >
                     <Image
                       src={article.coverImage.src}
                       alt={article.coverImage.alt}
                       fill
                       sizes="(min-width: 1024px) 30vw, (min-width: 768px) 45vw, 100vw"
                       className="h-full w-full object-cover"
-                      style={{ objectPosition: article.coverImagePosition ?? "center" }}
+                      style={{
+                        objectFit: article.coverImageFit ?? "cover",
+                        objectPosition: article.coverImagePosition ?? "center"
+                      }}
                     />
                   </div>
                 ) : null}

@@ -54,14 +54,21 @@ export default async function NewsSuccessPage() {
             {articles.map((article) => (
               <article key={article.id} className="surface overflow-hidden md:grid md:grid-cols-[minmax(230px,300px)_1fr]">
                 {article.coverImage ? (
-                  <div className="relative min-h-[320px] overflow-hidden md:h-full">
+                  <div
+                    className={`relative overflow-hidden bg-panel ${
+                      article.coverImageFit === "contain" ? "aspect-[4/5] md:aspect-auto" : "min-h-[320px] md:h-full"
+                    }`}
+                  >
                     <Image
                       src={article.coverImage.src}
                       alt={article.coverImage.alt}
                       fill
                       sizes="(min-width: 768px) 300px, 100vw"
                       className="h-full w-full object-cover"
-                      style={{ objectPosition: article.coverImagePosition ?? "center" }}
+                      style={{
+                        objectFit: article.coverImageFit ?? "cover",
+                        objectPosition: article.coverImagePosition ?? "center"
+                      }}
                     />
                   </div>
                 ) : null}

@@ -60,6 +60,7 @@ export type NewsArticleSummary = {
   location?: string;
   featured?: boolean;
   coverImage: DisplayImage | null;
+  coverImageFit?: "contain";
   coverImagePosition?: "top";
 };
 
