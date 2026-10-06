@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getNewsArticleBySlug, getNewsArticleSlugs } from "@/sanity/lib/loaders";
+import { createPageMetadata } from "@/src/lib/page-metadata";
 
 type Params = {
   slug: string;
@@ -31,11 +32,14 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     };
   }
 
-  return {
+  return createPageMetadata({
     title: article.seo?.title || article.title,
     description: article.seo?.description || article.excerpt,
-    robots: article.seo?.noindex ? { index: false, follow: false } : undefined
-  };
+    pathname: `/news-success/${article.slug}`,
+    image: article.seo?.ogImage || article.coverImage,
+    noindex: article.seo?.noindex,
+    type: "article"
+  });
 }
 
 export default async function NewsArticlePage({ params }: { params: Promise<Params> }) {

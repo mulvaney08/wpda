@@ -3,17 +3,20 @@ import { PageHero } from "@/components/page-hero";
 import { SectionHeading } from "@/components/section-heading";
 import { ImagePanel } from "@/components/image-panel";
 import { getWojtekPage } from "@/sanity/lib/loaders";
+import { createPageMetadata } from "@/src/lib/page-metadata";
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getWojtekPage();
 
-  return {
+  return createPageMetadata({
     title: page.seo?.title || "Wojtek Potaszkin",
     description:
       page.seo?.description ||
       "Profile of Wojtek Potaszkin, founder of WPDA: competition history, international experience, adjudicator credentials and academy vision.",
-    robots: page.seo?.noindex ? { index: false, follow: false } : undefined
-  };
+    pathname: "/wojtek",
+    image: page.seo?.ogImage || page.heroImage,
+    noindex: page.seo?.noindex
+  });
 }
 
 export default async function WojtekPage() {

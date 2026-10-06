@@ -4,17 +4,20 @@ import { PageHero } from "@/components/page-hero";
 import { SectionHeading } from "@/components/section-heading";
 import { ImagePanel } from "@/components/image-panel";
 import { getCompetitionPage } from "@/sanity/lib/loaders";
+import { createPageMetadata } from "@/src/lib/page-metadata";
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getCompetitionPage();
 
-  return {
+  return createPageMetadata({
     title: page.seo?.title || "Performance & Competition",
     description:
       page.seo?.description ||
       "See how WPDA supports dancers who are ready for performances and competitions with encouragement, care and clear coaching.",
-    robots: page.seo?.noindex ? { index: false, follow: false } : undefined
-  };
+    pathname: "/competitive",
+    image: page.seo?.ogImage || page.supportingImages[0] || page.fallbackImages[0],
+    noindex: page.seo?.noindex
+  });
 }
 
 export default async function CompetitivePage() {

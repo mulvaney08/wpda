@@ -70,9 +70,24 @@ type SanityNewsArticle = {
   location?: string;
   featured?: boolean;
   body?: string;
-  seo?: SeoFields;
+  seo?: SanitySeoFields;
   coverImage?: Parameters<typeof toDisplayImage>[0];
 };
+
+type SanitySeoFields = Omit<SeoFields, "ogImage"> & {
+  ogImage?: Parameters<typeof toDisplayImage>[0];
+};
+
+function normalizeSeo(seo: SanitySeoFields | null | undefined): SeoFields | undefined {
+  if (!seo) return undefined;
+
+  return {
+    title: seo.title,
+    description: seo.description,
+    noindex: seo.noindex,
+    ogImage: toDisplayImage(seo.ogImage, seo.title || "Open Graph image")
+  };
+}
 
 export const getSiteShell = cache(async (): Promise<SiteShell> => {
   const baseNavLinks = fallbackNavLinks as NavLink[];
@@ -143,7 +158,7 @@ export const getHomepageContent = cache(async () => {
         finalCtaText?: string;
         finalPrimaryCta?: { label: string; href: string };
         finalSecondaryCta?: { label: string; href: string };
-        seo?: SeoFields;
+        seo?: SanitySeoFields;
       }
     | undefined;
 
@@ -214,7 +229,7 @@ export const getHomepageContent = cache(async () => {
     finalPrimaryCta: home?.finalPrimaryCta || { label: "Start Here", href: "/join" },
     finalSecondaryCta: home?.finalSecondaryCta || { label: "Message Us On WhatsApp", href: siteConfig.whatsapp },
     testimonials: testimonials || [],
-    seo: home?.seo
+    seo: normalizeSeo(home?.seo)
   };
 });
 
@@ -295,7 +310,7 @@ export const getCompetitionPage = cache(async () => {
       .map((item: unknown, index: number) => toDisplayImage(item as never, `Competitive image ${index + 1}`))
       .filter(Boolean) as DisplayImage[],
     fallbackImages: [competitiveImages.feature, competitiveImages.kidsComp, competitiveImages.hug],
-    seo: data?.seo
+    seo: normalizeSeo(data?.seo)
   };
 });
 
@@ -330,7 +345,7 @@ export const getWojtekPage = cache(async () => {
     mediaAppearances: profile?.mediaAppearances || [],
     philosophy: profile?.philosophy,
     gallery: gallery.length ? gallery : wojtekGallery.slice(1),
-    seo: profile?.seo
+    seo: normalizeSeo(profile?.seo)
   };
 });
 
@@ -371,7 +386,7 @@ export const getContactPage = cache(async () => {
     inquiryCtaText: page?.inquiryCtaText || "Send Inquiry",
     openingContactNotes: page?.openingContactNotes,
     mapEmbedUrl: page?.mapEmbedUrl,
-    seo: page?.seo,
+    seo: normalizeSeo(page?.seo),
     contactImage,
     site
   };
@@ -422,7 +437,7 @@ export const getJoinPage = cache(async () => {
     primaryCtaHref: data?.primaryCtaHref || "/contact",
     secondaryCtaLabel: data?.secondaryCtaLabel || "View Class Types",
     secondaryCtaHref: data?.secondaryCtaHref || "/classes",
-    seo: data?.seo
+    seo: normalizeSeo(data?.seo)
   };
 });
 
@@ -475,7 +490,7 @@ export const getNewsArticleBySlug = cache(async (slug: string): Promise<NewsArti
     location: item.location,
     featured: item.featured,
     coverImage: toDisplayImage(item.coverImage, item.title),
-    seo: item.seo
+    seo: normalizeSeo(item.seo)
   };
 });
 
@@ -493,7 +508,7 @@ export const getPageSeo = cache(async (pageKey: "classes" | "team" | "gallery" |
     tags: ["pageSeo", `pageSeo:${pageKey}`]
   });
 
-  return (data?.seo || null) as SeoFields | null;
+  return normalizeSeo(data?.seo as SanitySeoFields | null | undefined) || null;
 });
 
 export const getTestimonials = cache(async () => {

@@ -3,18 +3,21 @@ import Link from "next/link";
 import { PageHero } from "@/components/page-hero";
 import { ImagePanel } from "@/components/image-panel";
 import { getJoinPage, getPageSeo } from "@/sanity/lib/loaders";
+import { createPageMetadata } from "@/src/lib/page-metadata";
 
 export async function generateMetadata(): Promise<Metadata> {
   const [join, fallbackSeo] = await Promise.all([getJoinPage(), getPageSeo("join")]);
   const seo = join.seo || fallbackSeo;
 
-  return {
+  return createPageMetadata({
     title: seo?.title || "Join WPDA",
     description:
       seo?.description ||
       "Ask WPDA about class times, friendly starting points and the best dance class for your child or family.",
-    robots: seo?.noindex ? { index: false, follow: false } : undefined
-  };
+    pathname: "/join",
+    image: seo?.ogImage || join.timetableImage,
+    noindex: seo?.noindex
+  });
 }
 
 export default async function JoinPage() {

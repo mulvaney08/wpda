@@ -9,17 +9,19 @@ import { SecondaryLink } from "@/components/secondary-link";
 import { TrackedAnchor } from "@/components/tracked-anchor";
 import { classesImages, homepageImages } from "@/data/images";
 import { getHomepageContent, getNewsArticles, getSiteShell } from "@/sanity/lib/loaders";
+import { createPageMetadata } from "@/src/lib/page-metadata";
 
 export async function generateMetadata(): Promise<Metadata> {
   const content = await getHomepageContent();
 
-  return {
+  return createPageMetadata({
     title: content.seo?.title || "Friendly Dance Classes For Families | WPDA Dublin",
     description:
       content.seo?.description ||
       "Wojtek Potaszkin Dance Academy offers welcoming dance classes in Dublin where children, teens and adults can build confidence and enjoy moving.",
-    robots: content.seo?.noindex ? { index: false, follow: false } : undefined
-  };
+    pathname: "/",
+    image: content.seo?.ogImage || content.heroImage || homepageImages.hero
+  });
 }
 
 function truncateExcerpt(value: string, maxLength: number) {

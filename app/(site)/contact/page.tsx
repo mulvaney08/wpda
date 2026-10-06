@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/page-hero";
 import { ImagePanel } from "@/components/image-panel";
 import { getContactPage } from "@/sanity/lib/loaders";
+import { createPageMetadata } from "@/src/lib/page-metadata";
 
 const contactPhone = "+353858755367";
 const whatsappUrl =
@@ -43,13 +44,15 @@ const socialIconLinks = [
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getContactPage();
 
-  return {
+  return createPageMetadata({
     title: page.seo?.title || "Contact",
     description:
       page.seo?.description ||
       "Contact Wojtek Potaszkin Dance Academy in Dublin and ask us about friendly class options, trial lessons and where to begin.",
-    robots: page.seo?.noindex ? { index: false, follow: false } : undefined
-  };
+    pathname: "/contact",
+    image: page.seo?.ogImage || page.contactImage,
+    noindex: page.seo?.noindex
+  });
 }
 
 export default async function ContactPage() {

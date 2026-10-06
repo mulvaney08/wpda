@@ -3,17 +3,21 @@ import { PageHero } from "@/components/page-hero";
 import { SectionHeading } from "@/components/section-heading";
 import { ImagePanel } from "@/components/image-panel";
 import { getPageSeo, getTeamMembers } from "@/sanity/lib/loaders";
+import { homepageImages } from "@/data/images";
+import { createPageMetadata } from "@/src/lib/page-metadata";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const seo = await getPageSeo("team");
+  const [seo, teamMembers] = await Promise.all([getPageSeo("team"), getTeamMembers()]);
 
-  return {
+  return createPageMetadata({
     title: seo?.title || "Team",
     description:
       seo?.description ||
       "Meet the coaching and support team at Wojtek Potaszkin Dance Academy in Dublin across Ballroom, Latin, Breaking, Hip-Hop, fitness and studio support.",
-    robots: seo?.noindex ? { index: false, follow: false } : undefined
-  };
+    pathname: "/team",
+    image: seo?.ogImage || teamMembers.find((member) => member.featured)?.image || homepageImages.teamMoment,
+    noindex: seo?.noindex
+  });
 }
 
 export default async function TeamPage() {

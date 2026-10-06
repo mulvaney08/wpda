@@ -4,17 +4,21 @@ import { PageHero } from "@/components/page-hero";
 import { SectionHeading } from "@/components/section-heading";
 import { ImagePanel } from "@/components/image-panel";
 import { getClassCategories, getPageSeo, getTestimonials } from "@/sanity/lib/loaders";
+import { classesImages } from "@/data/images";
+import { createPageMetadata } from "@/src/lib/page-metadata";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const seo = await getPageSeo("classes");
+  const [seo, categories] = await Promise.all([getPageSeo("classes"), getClassCategories()]);
 
-  return {
+  return createPageMetadata({
     title: seo?.title || "Dance Classes",
     description:
       seo?.description ||
       "Find welcoming WPDA dance classes in Dublin for children, teens and adults, including Ballroom, Latin, Breaking and Hip-Hop.",
-    robots: seo?.noindex ? { index: false, follow: false } : undefined
-  };
+    pathname: "/classes",
+    image: seo?.ogImage || categories[0]?.featuredImage || classesImages.childrenTeens,
+    noindex: seo?.noindex
+  });
 }
 
 export default async function ClassesPage() {

@@ -41,6 +41,7 @@ export type SeoFields = {
   title?: string;
   description?: string;
   noindex?: boolean;
+  ogImage?: DisplayImage | null;
 };
 
 export type HomeStyleCard = {

@@ -2,17 +2,21 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/page-hero";
 import { ImagePanel } from "@/components/image-panel";
 import { getGalleryPage, getPageSeo } from "@/sanity/lib/loaders";
+import { homepageImages } from "@/data/images";
+import { createPageMetadata } from "@/src/lib/page-metadata";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const seo = await getPageSeo("gallery");
+  const [seo, gallery] = await Promise.all([getPageSeo("gallery"), getGalleryPage()]);
 
-  return {
+  return createPageMetadata({
     title: seo?.title || "Gallery",
     description:
       seo?.description ||
       "Curated gallery from Wojtek Potaszkin Dance Academy featuring Ballroom, Latin, Breaking, classes, competitions and academy life in Dublin.",
-    robots: seo?.noindex ? { index: false, follow: false } : undefined
-  };
+    pathname: "/gallery",
+    image: seo?.ogImage || gallery[0]?.images[0] || homepageImages.teamMoment,
+    noindex: seo?.noindex
+  });
 }
 
 export default async function GalleryPage() {

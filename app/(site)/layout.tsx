@@ -6,6 +6,7 @@ import { SiteHeader } from "@/components/site-header";
 import { StructuredData } from "@/components/structured-data";
 import { SanityLive } from "@/sanity/lib/live";
 import { getSiteShell } from "@/sanity/lib/loaders";
+import { homepageImages } from "@/data/images";
 
 export const revalidate = 60;
 
@@ -28,7 +29,15 @@ export async function generateMetadata(): Promise<Metadata> {
       url: site.domain,
       siteName: site.shortName,
       locale: "en_IE",
-      type: "website"
+      type: "website",
+      images: [
+        {
+          url: homepageImages.hero.src,
+          alt: homepageImages.hero.alt,
+          width: homepageImages.hero.width,
+          height: homepageImages.hero.height
+        }
+      ]
     }
   };
 }

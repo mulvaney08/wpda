@@ -4,6 +4,7 @@ import { PageHero } from "@/components/page-hero";
 import { SectionHeading } from "@/components/section-heading";
 import { ImagePanel } from "@/components/image-panel";
 import { getAcademyPage } from "@/sanity/lib/loaders";
+import { createPageMetadata } from "@/src/lib/page-metadata";
 
 const aboutCopy = {
   heroTitle: "A dance academy where families feel at home",
@@ -38,10 +39,14 @@ const aboutCopy = {
 };
 
 export async function generateMetadata(): Promise<Metadata> {
-  return {
+  const page = await getAcademyPage();
+
+  return createPageMetadata({
     title: "About WPDA",
-    description: "Meet WPDA, a welcoming Dublin dance academy where children, teens and adults can feel comfortable, supported and excited to dance."
-  };
+    description: "Meet WPDA, a welcoming Dublin dance academy where children, teens and adults can feel comfortable, supported and excited to dance.",
+    pathname: "/about",
+    image: page.fallbackImages[0]
+  });
 }
 
 export default async function AboutPage() {

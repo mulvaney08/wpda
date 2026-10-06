@@ -3,6 +3,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { PageHero } from "@/components/page-hero";
 import { getNewsArticles, getPageSeo } from "@/sanity/lib/loaders";
+import { homepageImages } from "@/data/images";
+import { createPageMetadata } from "@/src/lib/page-metadata";
 
 const categoryLabel: Record<"news" | "success" | "event", string> = {
   news: "News",
@@ -24,15 +26,17 @@ function truncateExcerpt(value: string, maxLength: number) {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  const seo = await getPageSeo("news-success");
+  const [seo, articles] = await Promise.all([getPageSeo("news-success"), getNewsArticles()]);
 
-  return {
+  return createPageMetadata({
     title: seo?.title || "News & Success",
     description:
       seo?.description ||
       "Read the latest WPDA academy updates, competition highlights, event recaps and dancer success stories.",
-    robots: seo?.noindex ? { index: false, follow: false } : undefined
-  };
+    pathname: "/news-success",
+    image: seo?.ogImage || articles[0]?.coverImage || homepageImages.teamMoment,
+    noindex: seo?.noindex
+  });
 }
 
 export default async function NewsSuccessPage() {
