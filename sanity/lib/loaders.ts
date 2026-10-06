@@ -173,13 +173,12 @@ export const getHomepageContent = cache(async () => {
   }));
 
   return {
-    heroEyebrow: home?.heroEyebrow || "Dance Academy Dublin",
-    heroHeadline: home?.heroHeadline || "A friendly place for your child to start dancing.",
+    heroEyebrow: "Dance Classes For Children, Teens & Adults",
+    heroHeadline: "A place to dance, grow and belong.",
     heroSubheadline:
-      home?.heroSubheadline ||
-      "At WPDA, children, teens and adults can try Ballroom, Latin, Breaking and Hip-Hop in a warm, encouraging studio. No experience is needed, just come as you are and we will help you find the right class.",
-    heroPrimaryCta: home?.heroPrimaryCta || { label: "Find The Right Class", href: "/classes" },
-    heroSecondaryCta: home?.heroSecondaryCta || { label: "Ask Us A Question", href: "/contact" },
+      "Ballroom, Latin, Breaking and Hip-Hop classes in a warm, encouraging Dublin studio. No experience needed — we'll help you find the class that's right for you.",
+    heroPrimaryCta: { label: "Find Your Class", href: "/classes" },
+    heroSecondaryCta: { label: "View Timetable →", href: "/join" },
     heroImage: toDisplayImage(home?.heroImage, "Hero image") || homepageImages.hero,
     introEyebrow: home?.introEyebrow || "For Families",
     introTitle: home?.introTitle || "A studio where dancers are known by name",

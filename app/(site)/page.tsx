@@ -74,18 +74,21 @@ export default async function HomePage() {
 
   return (
     <>
-      <section className="section-wrap pb-6 pt-10 sm:pb-12 sm:pt-16 lg:pb-16 lg:pt-20">
-        <div className="editorial-grid items-center gap-y-6 sm:gap-y-10">
-          <div className="col-span-12 md:col-span-6">
+      <section className="section-wrap pb-8 pt-6 sm:pt-8 lg:pb-10 lg:pt-10">
+        <div className="editorial-grid items-start gap-y-8 lg:gap-y-0">
+          <div className="col-span-12 lg:col-span-5 lg:pt-2">
             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-gold">{content.heroEyebrow}</p>
-            <h1 className="mt-5 text-3xl font-semibold leading-[1.08] sm:text-4xl lg:text-5xl">{content.heroHeadline}</h1>
-            <p className="mt-6 max-w-xl text-lg text-white/85">{content.heroSubheadline}</p>
-            <div className="mt-8 flex flex-wrap gap-4">
+            <h1 className="mt-4 text-4xl font-semibold leading-[1.04] sm:text-5xl lg:text-[2.25rem] xl:text-[3.25rem]">
+              <span className="block">A place to dance,</span>
+              <span className="block">grow and belong.</span>
+            </h1>
+            <p className="mt-5 max-w-lg text-[1rem] leading-relaxed text-white/85 sm:text-lg">{content.heroSubheadline}</p>
+            <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3">
               <TrackedLink
                 href={content.heroPrimaryCta.href}
                 label={content.heroPrimaryCta.label}
                 location="hero_section"
-                className="rounded-full bg-gold px-6 py-3 text-sm font-semibold text-black hover:bg-ivory"
+                className="inline-flex min-h-11 items-center justify-center rounded-full bg-gold px-6 py-3 text-sm font-semibold text-black hover:bg-ivory focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
               >
                 {content.heroPrimaryCta.label}
               </TrackedLink>
@@ -93,19 +96,32 @@ export default async function HomePage() {
                 href={content.heroSecondaryCta.href}
                 label={content.heroSecondaryCta.label}
                 location="hero_section"
-                className="rounded-full border border-gold/40 bg-gold/10 px-6 py-3 text-sm font-semibold hover:border-gold hover:text-gold"
+                className="inline-flex min-h-11 items-center text-sm font-semibold text-white/75 hover:text-gold focus-visible:rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
               >
                 {content.heroSecondaryCta.label}
               </TrackedLink>
             </div>
+            <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-xs font-medium text-ivory/70 sm:text-sm" aria-label="Class benefits">
+              {["No experience needed", "Classes for all ages", "Friendly Dublin studio"].map((item) => (
+                <li key={item} className="inline-flex items-center gap-2">
+                  <span className="text-gold" aria-hidden="true">✓</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
           </div>
-          <div className="col-span-12 md:col-span-6 md:pt-6">
-            <ImagePanel image={content.heroImage} priority className="aspect-[100/100] md:aspect-[100/100] shadow-glow" imgClassName="object-[50%_58%]" />
+          <div className="col-span-12 lg:col-span-7">
+            <ImagePanel
+              image={content.heroImage}
+              priority
+              className="aspect-square shadow-glow sm:aspect-[5/4] lg:aspect-[16/9]"
+              imgStyle={{ objectPosition: "50% 0%" }}
+            />
           </div>
         </div>
       </section>
 
-      <section className="section-wrap py-8 sm:py-12">
+      <section className="section-wrap pb-8 pt-8 sm:pt-10 lg:pb-12 lg:pt-12">
         <SectionHeading eyebrow={content.introEyebrow} title={content.introTitle} intro={content.introText} />
         <div className="mt-6 sm:mt-8 grid gap-3 sm:gap-4 md:grid-cols-12">
           <ImagePanel image={introImages[0]} className="aspect-[4/3] md:col-span-4" imgClassName="object-[50%_35%]" />

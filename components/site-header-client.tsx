@@ -31,7 +31,7 @@ export function SiteHeaderClient({ navLinks, academyName, whatsapp }: SiteHeader
           <span className="truncate text-xs font-semibold tracking-wide !text-white sm:text-sm md:text-base">{academyName}</span>
         </Link>
 
-        <nav className="hidden flex-1 items-center justify-center gap-7 md:flex" aria-label="Main navigation">
+        <nav className="hidden flex-1 items-center justify-center gap-7 xl:flex" aria-label="Main navigation">
           {navLinks.map((link) => {
             const active = pathname === link.href;
             return (
@@ -48,7 +48,7 @@ export function SiteHeaderClient({ navLinks, academyName, whatsapp }: SiteHeader
           })}
         </nav>
 
-        <div className="hidden min-w-fit md:block md:-translate-x-4">
+        <div className="hidden min-w-fit xl:block xl:-translate-x-4">
           <Link
             href="/join"
             className="rounded-full border border-gold/60 px-5 py-2 text-sm font-medium text-gold hover:bg-gold hover:text-black"
@@ -57,7 +57,7 @@ export function SiteHeaderClient({ navLinks, academyName, whatsapp }: SiteHeader
           </Link>
         </div>
 
-        <details ref={mobileMenuRef} className="group relative shrink-0 md:hidden">
+        <details ref={mobileMenuRef} className="group relative shrink-0 xl:hidden">
           <summary className="list-none rounded-full border border-gold/25 bg-gold/10 px-4 py-2 text-sm">Menu</summary>
           <nav className="absolute right-0 mt-3 w-56 rounded-2xl border border-gold/20 bg-panel p-3 shadow-xl" aria-label="Mobile navigation">
             {navLinks.map((link) => (
