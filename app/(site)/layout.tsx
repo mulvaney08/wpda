@@ -8,8 +8,6 @@ import { SanityLive } from "@/sanity/lib/live";
 import { getSiteShell } from "@/sanity/lib/loaders";
 import { homepageImages } from "@/data/images";
 
-export const revalidate = 60;
-
 export async function generateMetadata(): Promise<Metadata> {
   const site = await getSiteShell();
 
